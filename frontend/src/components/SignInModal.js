@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 
-export const SignIn = () => {
+export const SignInModal = () => {
     const [email, setEmail] = useState()
     const handleError = (e) => {
         e.preventDefault()    
@@ -14,12 +14,12 @@ export const SignIn = () => {
         <CheckoutDetails>
             <h3 style={{fontWeight: "bold", fontSize: "16px", marginBottom: "1rem"}}>SignIn</h3>
             <>
-                <p>First Name</p>
+                <p>Email Address</p>
                 <Input type="text" name="fname" style={{marginBottom: "1rem"}} onChange={(e)=> {setEmail(e.target.value)}} />
             </>
             {email ?
-            <Button onClick={handleSubmit}>PLACE ORDER</Button> : 
-            <DisabledB onClick={handleError}> PLACE ORDER</DisabledB>
+            <Button onClick={handleSubmit}>Sign In</Button> : 
+            <DisabledB onClick={handleError}> Sign In</DisabledB>
             }
         </CheckoutDetails>
         <Cart>
@@ -69,6 +69,7 @@ cursor: pointer;
 `
 
 const Wrapper = styled.div`
+position: absolute;
 display: flex;
 justify-content: center;
 margin-top:2rem;
