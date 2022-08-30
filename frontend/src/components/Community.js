@@ -1,21 +1,63 @@
-import { useContext } from "react"
+import { useContext, useEffect} from "react"
 import { Context } from "./Context"
 import styled from "styled-components"
+import { PostList } from "./PostList"
+import { useAuth0 } from "@auth0/auth0-react"
 
 export const Community = () => {
-    //feed if signed in
-    //result of voting if not signed in
-    const {netflixD, post, setPost} = useContext(Context)
-    console.log(netflixD)
+    const {post, setPost, setPostList} = useContext(Context)
+    const { isAuthenticated } = useAuth0()
+    //timestamp
+    let dateObj = new Date()
+    let month = dateObj.getUTCMonth() + 1
+    let day = dateObj.getUTCDate()
+    let year = dateObj.getUTCFullYear()
+    const date = year + "/" + month + "/" + day
+
+    //get postList from db
+    useEffect(()=> {
+        fetch('/getposts')
+            .then((res)=>res.json())
+            .then((data)=>{
+                setPostList(data.data)
+            })
+    }, [])
+
+    const handleSubmit = (e) => {
+            fetch('/addPosts', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                post: post,
+                date: date
+            }),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                fetch('/getposts')
+                .then((res)=>res.json())
+                .then((data)=>{
+                    setPostList(data.data)
+                })
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
     return (
+        isAuthenticated ? 
         <Home>
-            <h1>Home</h1>
-            <textarea rows='10' cols='50' type='text' placeholder="What's happening?" onChange={(e)=> setPost(e)}></textarea>
+            <textarea rows='10' cols='50' type='text' placeholder="What's happening?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
             <ButtonDiv>
-                {post.length <= 280 ? <P> {280-post}</P> : <RedP> {280-post.length}</RedP>}
-                <Button type="submit" onClick={(e)=> console.log(e)} disabled={post.length <= 280 ? false : true}>Post</Button>
+                {post.length <= 10 ? <P> {10-post.length}</P> : <RedP> {10-post.length}</RedP>}
+                <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </ButtonDiv>
-        </Home>
+            <PostList/>
+        </Home> :
+        <>results of voting</>
     )
 }
 const Home = styled.form`
@@ -47,7 +89,8 @@ border: none;
 const P = styled.p`
 padding:10px 20px;
 align-self:center;
-color: grey`
+color: grey;
+`
 
 const RedP = styled.p`
 padding:10px 20px;

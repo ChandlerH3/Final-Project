@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect} from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { Context } from "./Context"
 
 export const Homepage = () => {
     const [message, setMessage] = useState('No messages')
-    useEffect(() => {
-        fetch('/fetch-message').then(res => res.json()).then(data => setMessage(data.message)).catch(e => console.log('Got error', e))
-        }, [])
+
     const streamingList = [
-        {name: "Netflix"},
-        {name: "Disney Plus"},
-        {name: "Amazon Prime"},
-        {name: "Apple TV"},
-        {name: "Hulu"}
+        {name: "Netflix", id:"netflix"},
+        {name: "Disney", id:"disney"},
+        {name: "Prime", id:"prime"},
+        {name: "Apple", id:"apple"},
+        {name: "Hulu", id:"hulu"}
     ]
     return (
         <Wrapper>
         <Streaming>
             {streamingList?.map((item)=> {
                 return(
-                    <StyleLink to="">
+                    <StyleLink key={item.id} to={`/${item.name.toLowerCase()}`}>
                         {/* <Img src = {product.imageSrc}/> */}
                         <Name>{item.name}</Name>
                     </StyleLink>

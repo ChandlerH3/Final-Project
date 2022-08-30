@@ -1,8 +1,19 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const morgan = require("morgan");
 
-app.get('/fetch-message', function (req, res) {
-    res.status(200).json({message: 'World'})
-})
+const { addPosts, getPosts} = require("./handlers")
 
-app.listen(8000)
+express()
+    .use(morgan("tiny"))
+    .use(express.static("public"))
+    .use(express.json())
+    .use(express.urlencoded({ extended: false }))
+    .use("/", express.static(__dirname + "/"))
+
+
+    .post('/addposts', addPosts)
+    .get('/getposts', getPosts)
+    // handle 404s
+    .use((req, res) => res.status(404).type("txt").send("🤷‍♂️"))
+
+    .listen(8000, () => console.log("Listening on port 8000"));

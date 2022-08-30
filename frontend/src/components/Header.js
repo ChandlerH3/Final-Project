@@ -1,58 +1,33 @@
 import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { Context } from "./Context"
-import { SignInModal } from "./SignInModal"
+
+import AuthNav from './auth-nav';
+import { Search } from "./Search"
+
 
 
 export const Header = () => {
-    const {modal, setModal} = useContext(Context)
-    const toggle = () => {
-        setModal(true)
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate('/')
     }
     return (
         <>
             <Wrapper>
                 <Container>
-                    <p>Streaming Community</p>
-                    <Input
-                    type='text'
-                    value=''
-                    placeholder="what's in your mind?"
-                    onChange={(e)=> console.log(e)}
-                    onKeyDown={(e)=>{
-                        console.log(e)
-                    // switch (e.key){
-                    //     case 'Enter': {
-                    //     alert(filteredArray[index]);
-                    //     return;
-                    //             }
-                    //     case 'ArrowUp': {
-                    //         if(select>=1){
-                    //     setSelect(select-1)
-                    //         }
-                    //     return;
-                    //             }
-                    //     case 'ArrowDown': {
-                    //         if (select+1 < limit)
-                    //             setSelect(select+1);
-                    //         return;
-                    //                 }
-                    //         }
-                        }
-                    }
-            />
+                    <p onClick={handleClick}>The District</p>
                 </Container>
                 <Menu>
                     <>
                     <Link to="/community">Community</Link>
                     </>
                     <>
-                    <button onClick={toggle}>Sign in</button>
+                    <AuthNav/>
                     </>
                 </Menu>
             </Wrapper>
-            {modal && <SignInModal/>}
         </>
     )
 }
@@ -64,7 +39,6 @@ width:100%;
 align-items: center;
 padding-top:20px;
 padding-bottom:20px;
-background-color: pink;
 `
 const Container = styled.div`
 display: flex;
