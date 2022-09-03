@@ -11,6 +11,11 @@ export const Provider = ({ children }) => {
     const [genres, setGenres] = useState([])
     const [postList, setPostList] = useState()
 
+    const [nVote, setNVote] = useState(0)
+    const [dVote, setDVote] = useState(0)
+    const [pVote, setPVote] = useState(0)
+    const [aVote, setAVote] = useState(0)
+    const [hVote, setHVote] = useState(0)
     // // genresArray
     // useEffect(()=> {
     //     console.log("test1")
@@ -230,7 +235,17 @@ export const Provider = ({ children }) => {
             appleD,
             huluD,
             primeD,
-            disneyD
+            disneyD,
+            nVote,
+            setNVote,
+            dVote,
+            setDVote,
+            aVote,
+            setAVote,
+            pVote,
+            setPVote,
+            hVote,
+            setHVote
         }}
         >
         {children}

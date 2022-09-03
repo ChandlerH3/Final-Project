@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { addPosts, getPosts} = require("./handlers")
+const { addPosts, getPosts, addVotes, getVotes, patchVotes} = require("./handlers")
 
 express()
     .use(morgan("tiny"))
@@ -13,6 +13,10 @@ express()
 
     .post('/addposts', addPosts)
     .get('/getposts', getPosts)
+    
+    .post('/addvotes', addVotes)
+    .get('/getvotes', getVotes)
+    .patch('/addvotes', patchVotes)
     // handle 404s
     .use((req, res) => res.status(404).type("txt").send("🤷‍♂️"))
 
