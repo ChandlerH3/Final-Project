@@ -57,7 +57,7 @@ export const Community = () => {
             </ButtonDiv>
             <PostList/>
         </Home> :
-        <>results of voting</>
+        <PostList/>
     )
 }
 const Home = styled.form`

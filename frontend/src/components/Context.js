@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, createContext } from "react";
 
 export const Context = createContext(null);
@@ -7,8 +8,12 @@ export const Provider = ({ children }) => {
     const [primeD, setPrimeD] = useState([])
     const [appleD, setAppleD] = useState([])
     const [huluD, setHuluD] = useState([])
-    const [post, setPost] = useState("");
     const [genres, setGenres] = useState([])
+    const [voteResult, setVoteResult] = useState([])
+    const { isAuthenticated } = useAuth0()
+
+    const [post, setPost] = useState("")
+    const [voted, setVoted] = useState()
     const [postList, setPostList] = useState()
 
     const [nVote, setNVote] = useState(0)
@@ -16,6 +21,23 @@ export const Provider = ({ children }) => {
     const [pVote, setPVote] = useState(0)
     const [aVote, setAVote] = useState(0)
     const [hVote, setHVote] = useState(0)
+
+
+     //retrieve percentage data from db
+    useEffect(()=> {
+        fetch('/getvotes')
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log("first", data.data)
+                setVoteResult(data.data)
+                setNVote(data.data[0].votes[0])
+                setDVote(data.data[0].votes[1])
+                setPVote(data.data[0].votes[2])
+                setAVote(data.data[0].votes[3])
+                setHVote(data.data[0].votes[4])
+            })
+    }, [isAuthenticated])
+
     // // genresArray
     // useEffect(()=> {
     //     console.log("test1")
@@ -33,7 +55,7 @@ export const Provider = ({ children }) => {
     //         .catch(err => console.error(err));
     // }, [])
 
-    // // netflixArray
+    // netflixArray
     // useEffect(()=>{
     //     console.log("test")
     //     const options = {
@@ -64,11 +86,11 @@ export const Provider = ({ children }) => {
     //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=netflix&type=movie&genre=18&page=1&output_language=en&language=en', options)
     //     .then(response => response.json())
     //     .then(response => {
-    //         setDisneytD(response.results)
+    //         setDisneyD(response.results)
     //     })
     //     .catch(err => console.error(err));
     // }, [])
-    // // primeArray
+    // primeArray
     // useEffect(()=>{
     //     console.log("test")
     //     const options = {
@@ -103,7 +125,7 @@ export const Provider = ({ children }) => {
     //     .catch(err => console.error(err));
     // }, [])
 
-    // // huluArray
+    // huluArray
     // useEffect(()=>{
     //     const options = {
     //         method: 'GET',
@@ -245,7 +267,12 @@ export const Provider = ({ children }) => {
             pVote,
             setPVote,
             hVote,
-            setHVote
+            setHVote,
+            voted,
+            setVoted,
+            isAuthenticated,
+            voteResult,
+            setVoteResult
         }}
         >
         {children}
