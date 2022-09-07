@@ -83,13 +83,14 @@ export const Provider = ({ children }) => {
     //         'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
     //     }   
     //     };
-    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=netflix&type=movie&genre=18&page=1&output_language=en&language=en', options)
+    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=disney&type=movie&genre=18&page=1&output_language=en&language=en', options)
     //     .then(response => response.json())
     //     .then(response => {
     //         setDisneyD(response.results)
     //     })
     //     .catch(err => console.error(err));
     // }, [])
+
     // primeArray
     // useEffect(()=>{
     //     console.log("test")
@@ -100,13 +101,14 @@ export const Provider = ({ children }) => {
     //         'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
     //     }   
     //     };
-    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=netflix&type=movie&genre=18&page=1&output_language=en&language=en', options)
+    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=prime&type=movie&genre=18&page=1&output_language=en&language=en', options)
     //     .then(response => response.json())
     //     .then(response => {
     //         setPrimeD(response.results)
     //     })
     //     .catch(err => console.error(err));
     // }, [])
+
     // // appleArray
     // useEffect(()=>{
     //     console.log("test")
@@ -117,7 +119,7 @@ export const Provider = ({ children }) => {
     //         'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
     //     }   
     //     };
-    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=netflix&type=movie&genre=18&page=1&output_language=en&language=en', options)
+    //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=ca&service=apple&type=movie&genre=18&page=1&output_language=en&language=en', options)
     //     .then(response => response.json())
     //     .then(response => {
     //         setAppleD(response.results)

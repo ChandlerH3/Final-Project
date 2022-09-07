@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { Context } from "./Context"
 
 import AuthNav from './auth-nav';
-import { Search } from "./Search"
 
 
 
@@ -46,7 +45,7 @@ align-items: center;
 `
 
 const Menu = styled.div`
-display:flex;`
+`
 
 const Input = styled.input`
 display: block;

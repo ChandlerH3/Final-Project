@@ -1,106 +1,23 @@
 import { useState, useEffect, useContext} from "react"
 import styled from "styled-components"
-import { Link } from "react-router-dom"
 import { Context } from "./Context"
-import { Bar } from "./Bar"
+import { ListBlock } from "./ListBlock"
+import LoginButton from "./login-button"
 
 export const Homepage = () => {
-    // const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
-    // const [test, setTest] = useState(false)
-    
-    // //votes calculation
-    // const votes = [nVote, dVote, pVote, aVote, hVote]
-    // const result = votes.reduce((a,b)=> a+b, 0)
-    // const percentage = []
-    // for(let i = 0; i< votes.length; i++){
-    //     if (result > 0){
-    //     percentage.push(Math.round(votes[i]/result*100))
-    //     } 
-    // }
-
-    // //streaming data
-    // const streamingList = [
-    //     {name: "Netflix", id:"netflix", vote: `${nVote}`, percentage: `${percentage[0]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-    //     {name: "Disney", id:"disney", vote: `${dVote}`, percentage: `${percentage[1]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-    //     {name: "Prime", id:"prime", vote: `${pVote}`, percentage: `${percentage[2]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-    //     {name: "Apple", id:"apple", vote: `${aVote}`, percentage: `${percentage[3]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-    //     {name: "Hulu", id:"hulu", vote: `${hVote}`, percentage: `${percentage[4]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]}
-    // ]
-    
-    // const handleClick = (props) => {
-    //     setVoted(props)
-    //     switch (props){
-    //         case "Netflix":
-    //         setNVote(nVote+1);
-    //         break;
-    //         case "Disney":
-    //         setDVote(dVote+1);
-    //         break;
-    //         case "Prime":
-    //         setPVote(pVote+1);
-    //         break;
-    //         case "Apple":
-    //         setAVote(aVote+1);
-    //         break;
-    //         case "Hulu":
-    //         setHVote(hVote+1);
-    //         break;
-    //     }     
-    //     setTest(true);
-    // }
-
-    // //post if no vote data in db after voting
-    // if (test && voteResult.length == 0 ) {
-    //     console.log("post data")
-    //     fetch('/addvotes', {
-    // method: 'POST',
-    // headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    // },
-    // body: JSON.stringify({
-    //     votes: votes,
-    // }),
-    // })
-    // .then((res) => res.json())
-    // .then((data) => {
-    //     setTest(false)
-    //     fetch('/getvotes')
-    //     .then((res)=>res.json())
-    //     .then((data)=>{
-    //         console.log("clicked", data)
-    //         setVoteResult(data.data)
-    //     })
-    // })
-    // .catch((err) => {
-    //     console.error(err);
-    // }); 
-    // } 
-
-    // //patch if db already has data aftter voting
-    // if (test && voteResult.length > 0) {
-    //     console.log("patch data")
-    //     fetch("/addvotes", {
-    //         method: "PATCH",
-    //         headers: { "Content-type": "application/json" },
-    //         body: JSON.stringify({
-    //             votes: votes,
-    //         }),
-    //         })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             setTest(false)
-    //             fetch('/getvotes')
-    //             .then((res)=>res.json())
-    //             .then((data)=>{
-    //                 console.log("clicked", data)
-    //                 setVoteResult(data.data)
-    //             })
-    //         })
-    //         .catch((err) => {
-    //         console.log("Error :", err);
-    //         });
-    // }
+    const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+    const [index, setIndex] = useState(0);
+    const {isAuthenticated} = useContext(Context)
+    // useEffect(() => {
+    // setTimeout(() =>
+    //     // setIndex((prevIndex) =>
+    //     // prevIndex === colors.length - 1 ? 0 : prevIndex + 1
+    //     // ), 2000
+    //     {colors.length - index === 1 ? setIndex(0) : setIndex(index+1)}, 2000
+    // );
+    // }, []);
+    useEffect(() => {setInterval(() => setIndex(index => (index + 1) % 3), 2000)}, [])
+    const singleImg = colors[index]
 
     return (
     //     <Wrapper>
@@ -146,54 +63,101 @@ export const Homepage = () => {
     //     }
         
     // </Wrapper>
-    <>homepage</>
+    <Wrapper>
+        <Banner>
+            <Content>
+                    <p>Welcome to <span>The District</span></p>
+                    <p>Click below to vote your favourite streaming plateform</p>
+                    {isAuthenticated ? <button>Your community</button>
+                    : <LoginButton />}                
+            </Content>
+            <SlideContainer>
+                <SlideBlock>
+                    <Slides key={index} style={{backgroundColor: `${singleImg}`}}></Slides>
+                </SlideBlock>
+            </SlideContainer>
+        </Banner>
+        <ListBlock />
+    </Wrapper>
     )
 }
-const BarDiv = styled.div`
-width: 100%;
+const Title = styled.div`
+`
+const Content = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
+const SlideContainer = styled.div`
+margin: 0 auto;
+overflow: hidden;
+width:50%;
 `
 
-const ItemName = styled.p`
-width: 60px;`
-const VoteItem = styled.div`
-display:flex;
+const SlideBlock = styled.div`
+white-space: nowrap;
+transition: ease 1000ms;
 `
-const VoteContainer = styled.div`
-display:flex;
+
+const Slides = styled.div`
+display: inline-block;
+height:100px;
+width:100%;
+`
+const Wrapper = styled.div`
+display: flex;
 flex-direction: column;
 `
+const Banner = styled.div`
+display: flex;
+`
+const List = styled.div`
+`
+// const BarDiv = styled.div`
+// width: 100%;
+// `
 
-const Name = styled.p`
-text-align:center;
-margin-top: 15px;
-margin-bottom: 10px;
-`
-const Price = styled.p`
-text-align: center;
-`
+// const ItemName = styled.p`
+// width: 60px;`
+// const VoteItem = styled.div`
+// display:flex;
+// `
+// const VoteContainer = styled.div`
+// display:flex;
+// flex-direction: column;
+// `
+
+// const Name = styled.p`
+// text-align:center;
+// margin-top: 15px;
+// margin-bottom: 10px;
+// `
+// const Price = styled.p`
+// text-align: center;
+// `
 const Img = styled.img`
 width: 100px;
 height:100px;
 align-self: center;`
 
 
-const Streaming= styled.div`
+const Feature= styled.div`
 display:grid;
 grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
 gap:1.875rem;
 margin-top: 20px;
 `
 
-const Wrapper = styled.div`
-display:flex;
-flex-direction: column;
-margin-left: 20px;
-margin-right: 20px;
-align-self: center;
-justify-content: center;
-`
+// const Wrapper = styled.div`
+// display:flex;
+// flex-direction: column;
+// margin-left: 20px;
+// margin-right: 20px;
+// align-self: center;
+// justify-content: center;
+// `
 
-const StyleLink = styled(Link)`
+const Movie = styled.div`
 display: flex;
 flex-direction: column;
 text-decoration: none;

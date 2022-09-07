@@ -104,9 +104,9 @@ export const Voting =({width})=> {
             {isAuthenticated ? 
             <>
             <>
-            {streamingList?.map((item)=> {
+            {streamingList?.map((item, index)=> {
                 return(
-                    <Container>
+                    <Container key={index}>
                         {/* <Img src = {product.imageSrc}/> */}
                         <p>{item.name} : {item.percentage}</p>
                         <p>{item.vote}</p> 
@@ -117,9 +117,9 @@ export const Voting =({width})=> {
         </>
 
             <Result>
-            { percentage.length>0 && percentage.map((item) => {
+            { percentage.length>0 && percentage.map((item, index) => {
                     return (
-                        <Bar width={item}/>
+                        <Bar key={index} width={item}/>
                     )
                 })
                 }
