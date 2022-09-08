@@ -3,9 +3,19 @@ import styled from "styled-components"
 import { Context } from "./Context"
 import { ListBlock } from "./ListBlock"
 import LoginButton from "./login-button"
+import apple from "../img/apple.jpg"
+import disney from "../img/disney.jpg"
+import netflix from "../img/netflix.jpg"
+import hulu from "../img/hulu.jpg"
+import prime from "../img/prime.jpg"
 
 export const Homepage = () => {
-    const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+    const img = [apple, 
+    disney, 
+    netflix,
+    hulu,
+    prime
+];
     const [index, setIndex] = useState(0);
     const {isAuthenticated} = useContext(Context)
     // useEffect(() => {
@@ -16,8 +26,8 @@ export const Homepage = () => {
     //     {colors.length - index === 1 ? setIndex(0) : setIndex(index+1)}, 2000
     // );
     // }, []);
-    useEffect(() => {setInterval(() => setIndex(index => (index + 1) % 3), 2000)}, [])
-    const singleImg = colors[index]
+    useEffect(() => {setInterval(() => setIndex(index => (index + 1) % 5), 3000)}, [])
+    const singleImg = img[3]
 
     return (
     //     <Wrapper>
@@ -73,7 +83,7 @@ export const Homepage = () => {
             </Content>
             <SlideContainer>
                 <SlideBlock>
-                    <Slides key={index} style={{backgroundColor: `${singleImg}`}}></Slides>
+                    <Slides key={index} style={{backgroundImage: `url('${singleImg}')`}}></Slides>
                 </SlideBlock>
             </SlideContainer>
         </Banner>
@@ -81,17 +91,19 @@ export const Homepage = () => {
     </Wrapper>
     )
 }
-const Title = styled.div`
-`
+
 const Content = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
+text-align: center;
+padding-left: 100px;
 `
 const SlideContainer = styled.div`
-margin: 0 auto;
+margin: 0;
 overflow: hidden;
-width:50%;
+height: 100%;
 `
 
 const SlideBlock = styled.div`
@@ -101,8 +113,11 @@ transition: ease 1000ms;
 
 const Slides = styled.div`
 display: inline-block;
-height:100px;
-width:100%;
+height:600px;
+width:800px;
+background-size: cover;
+-webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
+clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%);
 `
 const Wrapper = styled.div`
 display: flex;
@@ -110,8 +125,12 @@ flex-direction: column;
 `
 const Banner = styled.div`
 display: flex;
-`
-const List = styled.div`
+height: 520px;
+justify-content: space-between;
+align-items: stretch;
+padding: 0;
+margin: 0;
+
 `
 // const BarDiv = styled.div`
 // width: 100%;
