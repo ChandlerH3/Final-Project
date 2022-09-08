@@ -46,7 +46,6 @@ const getVotes = async (req, res) => {
 
 const patchVotes = async (req, res) => {
     const votes = req.body.votes
-    console.log(req.body)
     if (!votes){
         res.status(400).json({
             status: 400, message: 'unable to update due to key missing',
@@ -70,6 +69,7 @@ const patchVotes = async (req, res) => {
 const addPosts = async (req, res) => {
     const newPost = {
         id: uuidv4(),
+        community: req.body.community,
         post: req.body.post,
         date: req.body.date
     }
@@ -92,7 +92,7 @@ const getPosts = async (req, res) => {
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("The_District");
-    
+
         const result = await db.collection("posts").find().sort({ _id: -1 }).toArray();
         result ? res.status(200).json({ status: 200, data: result }) 
         : res.status(404).json({ status: 404, data: "Not Found" });
@@ -102,8 +102,26 @@ const getPosts = async (req, res) => {
         }
 };
 
+const getEachCommunityPosts = async (req, res) => {
+    const community = req.params.community
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const db = client.db("The_District");
+
+        const result = await db.collection("posts").find({community: community}).toArray();
+        result ? res.status(200).json({ status: 200, data: result }) 
+        : res.status(404).json({ status: 404, data: "Not Found" });
+        client.close();
+        } catch (err) {
+        res.status(500).json({ status: 500, message: err.message });
+        }
+};
+
+
 module.exports = {
     getPosts,
+    getEachCommunityPosts,
     addPosts,
     addVotes,
     getVotes,

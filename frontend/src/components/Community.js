@@ -3,9 +3,13 @@ import { Context } from "./Context"
 import styled from "styled-components"
 import { PostList } from "./PostList"
 import { useAuth0 } from "@auth0/auth0-react"
+import { Sidebar } from "./Sidebar"
+import { useParams } from "react-router-dom"
 
 export const Community = () => {
-    const {post, setPost, setPostList} = useContext(Context)
+    const name = useParams()
+    const community = name.community
+    const {post, setPost, setPostList, voted} = useContext(Context)
     const { isAuthenticated } = useAuth0()
     //timestamp
     let dateObj = new Date()
@@ -14,13 +18,28 @@ export const Community = () => {
     let year = dateObj.getUTCFullYear()
     const date = year + "/" + month + "/" + day
 
+
     //get postList from db
     useEffect(()=> {
-        fetch('/getposts')
+        console.log(Object.keys(name).length)
+        if (Object.keys(name).length === 0){
+            console.log("regular fetch")
+            fetch('/getposts')
             .then((res)=>res.json())
             .then((data)=>{
                 setPostList(data.data)
             })
+        }
+        if (Object.keys(name).length > 0){
+            console.log("fetch each")
+            fetch(`/getposts/${name.community}`)
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data)
+                setPostList(data.data)
+            })
+        }
+        
     }, [])
 
     const handleSubmit = (e) => {
@@ -31,13 +50,14 @@ export const Community = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                community: community,
                 post: post,
                 date: date
             }),
             })
             .then((res) => res.json())
             .then((data) => {
-                fetch('/getposts')
+                fetch(`/getposts/${name.community}`)
                 .then((res)=>res.json())
                 .then((data)=>{
                     setPostList(data.data)
@@ -49,21 +69,36 @@ export const Community = () => {
     }
     return (
         isAuthenticated ? 
-        <Home>
-            <textarea rows='10' cols='50' type='text' placeholder="What's happening?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
-            <ButtonDiv>
-                {post.length <= 10 ? <P> {10-post.length}</P> : <RedP> {10-post.length}</RedP>}
-                <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
-            </ButtonDiv>
+        <Wrapper>
+            <Home>
+            {Object.keys(name).length > 0 && 
+            <>
+                <textarea rows='10' cols='50' type='text' placeholder="What's happening?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
+                    <ButtonDiv>
+                        {post.length <= 10 ? <P> {10-post.length}</P> : <RedP> {10-post.length}</RedP>}
+                        <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
+                    </ButtonDiv>
+            </>
+}
+                <PostList/>
+            </Home>
+            <Sidebar />
+        </Wrapper>
+        :
+        <Wrapper>
             <PostList/>
-        </Home> :
-        <PostList/>
+            <Sidebar />
+        </Wrapper>
+        
     )
 }
+const Wrapper = styled.div`
+display:flex;
+justify-content: center;
+`
 const Home = styled.form`
 display: flex;
 flex-direction: column;
-margin-top: 20px;
 align-items: center;
 `
 

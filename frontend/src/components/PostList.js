@@ -22,7 +22,7 @@ export const PostList = () => {
                             //     <Handle>@{tweet.author.handle}<BsDot style={{alignSelf: 'center'}}/>{moment(tweet.timestamp).format('MMMM Do')}</Handle>
                             // </Bio> */}
                             <div key={post.id}>
-                            <Handle>{post.date}</Handle>
+                            <Handle>{post.date} {post.community}</Handle>
                             <Feed>{post.post}</Feed>
                             </div>
                                 )
