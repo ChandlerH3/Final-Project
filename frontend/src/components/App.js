@@ -4,7 +4,6 @@ import GlobalStyle from './GlobalStyle';
 import { Community } from "./Community";
 import { Homepage } from "./Homepage";
 import { Header } from "./Header";
-import { Streaming } from "./Streaming";
 import { Voting } from "./Voting";
 
 const App = () => {

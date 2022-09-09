@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 import { Sidebar } from "./Sidebar"
 import { useParams } from "react-router-dom"
 
+
 export const Community = () => {
     const name = useParams()
     const community = name.community
@@ -37,7 +38,7 @@ export const Community = () => {
             })
         }
         
-    }, [])
+    }, [name])
 
     const handleSubmit = (e) => {
             fetch('/addPosts', {
@@ -77,13 +78,13 @@ export const Community = () => {
                     </ButtonDiv>
             </>
 }
-                <PostList/>
+                <PostList />
             </Home>
             <Sidebar />
         </Wrapper>
         :
         <Wrapper>
-            <PostList/>
+            <PostList />
             <Sidebar />
         </Wrapper>
         
