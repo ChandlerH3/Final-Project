@@ -21,9 +21,7 @@ export const Community = () => {
 
     //get postList from db
     useEffect(()=> {
-        console.log(Object.keys(name).length)
         if (Object.keys(name).length === 0){
-            console.log("regular fetch")
             fetch('/getposts')
             .then((res)=>res.json())
             .then((data)=>{
@@ -35,7 +33,6 @@ export const Community = () => {
             fetch(`/getposts/${name.community}`)
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data)
                 setPostList(data.data)
             })
         }

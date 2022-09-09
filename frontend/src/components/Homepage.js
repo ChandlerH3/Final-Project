@@ -26,7 +26,7 @@ export const Homepage = () => {
     //     {colors.length - index === 1 ? setIndex(0) : setIndex(index+1)}, 2000
     // );
     // }, []);
-    useEffect(() => {setInterval(() => setIndex(index => (index + 1) % 5), 3000)}, [])
+    useEffect(() => void setInterval(() => setIndex(index => (index + 1) % 5), 3000), [])
     const singleImg = img[3]
 
     return (

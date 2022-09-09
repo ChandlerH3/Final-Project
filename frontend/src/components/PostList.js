@@ -13,7 +13,6 @@ export const PostList = () => {
                         </Avatar> */}
                         <Content>
                             {postList && postList.map((post) => {
-                                console.log(post)
                                 return (
                             // {/* <Bio onClick={(e)=>{
                             //     e.preventDefault();

@@ -19,11 +19,11 @@ export const Voting =({width})=> {
     }
 
     const streamingList = [
-        {name: "Netflix", id:"netflix", vote: `${nVote}`, percentage: `${percentage[0]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-        {name: "Disney", id:"disney", vote: `${dVote}`, percentage: `${percentage[1]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-        {name: "Prime", id:"prime", vote: `${pVote}`, percentage: `${percentage[2]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-        {name: "Apple", id:"apple", vote: `${aVote}`, percentage: `${percentage[3]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]},
-        {name: "Hulu", id:"hulu", vote: `${hVote}`, percentage: `${percentage[4]}`, colors: ["#0088FE", "#00C49F", "#FFBB28"]}
+        {name: "Netflix", id:"netflix", vote: `${nVote}`, percentage: `${percentage[0]}`},
+        {name: "Disney", id:"disney", vote: `${dVote}`, percentage: `${percentage[1]}`},
+        {name: "Prime", id:"prime", vote: `${pVote}`, percentage: `${percentage[2]}`},
+        {name: "Apple", id:"apple", vote: `${aVote}`, percentage: `${percentage[3]}`},
+        {name: "Hulu", id:"hulu", vote: `${hVote}`, percentage: `${percentage[4]}`}
     ]
 
     const handleClick = (props) => {

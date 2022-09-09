@@ -22,6 +22,22 @@ export const Provider = ({ children }) => {
     const [aVote, setAVote] = useState(0)
     const [hVote, setHVote] = useState(0)
 
+    const nA = []
+    const dA = []
+    const pA = []
+    const aA = []
+    const hA = []
+    if (netflixD.length > 0){
+    for (let i = 0; i < 3; i++){
+        nA.push(netflixD[i])
+        dA.push(disneyD[i])
+        pA.push(primeD[i])
+        aA.push(appleD[i])
+        hA.push(huluD[i+1])
+    }}
+    // const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
+
+    const merg = [{'Netflix': nA }]
 
      //retrieve percentage data from db
     useEffect(()=> {
@@ -38,6 +54,18 @@ export const Provider = ({ children }) => {
             })
     }, [isAuthenticated])
 
+    // const movies = []
+    // merg?.map(item=> 
+    //     Object.values(item)[0].forEach((item) => {
+    //         movies.push(item)
+    //     })
+    // )
+
+    // const filtered = movies.map(item => item.title)
+        const filtered = ['#AnneFrank. Parallel Stories', '#Rucker50', '#realityhigh', '(500) Days of Summer', '10 Things I Hate About You', '127 Hours', '1/2 New Year', '10 Items or Less', '10 Years', 'CODA', 'Cha Cha Real Smooth', 'Cherry', '1 Night In San Diego', '10.0 Earthquake', '100% Wolf']
+    // const shuffledMovies = movies.sort((a, b) => 0.5 - Math.random());
+    // console.log(shuffledMovies)
+    // console.log(movies)
     // // genresArray
     // useEffect(()=> {
     //     console.log("test1")
@@ -140,7 +168,6 @@ export const Provider = ({ children }) => {
     //     fetch('https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=hulu&type=movie&output_language=en&language=en', options)
     //     .then(response => response.json())
     //     .then(response => {
-    //         console.log(response)
     //         setHuluD(response.results)
     //     })
     //     .catch(err => console.error(err));
@@ -148,6 +175,7 @@ export const Provider = ({ children }) => {
 
 
     useEffect(()=>{
+        console.log("no")
         setGenres({1: 'Biography', 2: 'Film Noir', 3: 'Game Show', 4: 'Musical', 5: 'Sport', 6: 'Short', 7: 'Adult', 12: 'Adventure', 14: 'Fantasy', 16: 'Animation', 18: 'Drama', 27: 'Horror', 28: 'Action', 35: 'Comedy', 36: 'History', 37: 'Western', 53: 'Thriller', 80: 'Crime', 99: 'Documentary', 878: 'Science Fiction', 9648: 'Mystery', 10402: 'Music', 10749: 'Romance', 10751: 'Family', 10752: 'War', 10763: 'News', 10764: 'Reality', 10767: 'Talk Show'})
         setNetflixD([
         {age: 10,
@@ -297,7 +325,9 @@ export const Provider = ({ children }) => {
             setVoted,
             isAuthenticated,
             voteResult,
-            setVoteResult
+            setVoteResult,
+            merg,
+            filtered
         }}
         >
         {children}

@@ -3,22 +3,22 @@ import { useContext } from "react"
 import { Context } from "./Context"
 
 export const ListBlock = () => {
-    const {netflixD, disneyD, primeD, appleD, huluD} = useContext(Context)
-    const nA = []
-    const dA = []
-    const pA = []
-    const aA = []
-    const hA = []
-    if (netflixD.length > 0){
-    for (let i = 0; i < 3; i++){
-        nA.push(netflixD[i])
-        dA.push(disneyD[i])
-        pA.push(primeD[i])
-        aA.push(appleD[i])
-        hA.push(huluD[i])
-    }}
-        // const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
-        const merg = [{'Netflix': nA }]
+    const {netflixD, merg} = useContext(Context)
+    // const nA = []
+    // const dA = []
+    // const pA = []
+    // const aA = []
+    // const hA = []
+    // if (netflixD.length > 0){
+    // for (let i = 0; i < 3; i++){
+    //     nA.push(netflixD[i])
+    //     dA.push(disneyD[i])
+    //     pA.push(primeD[i])
+    //     aA.push(appleD[i])
+    //     hA.push(huluD[i])
+    // }}
+    //     const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
+        // const merg = [{'Netflix': nA }]
     // if (nA.length > 0 && dA.length > 0){
     //     nA.forEach((movie)=>{
     //         return merg.netflix = {...movie}
@@ -39,7 +39,7 @@ export const ListBlock = () => {
                                 <Movie style={{backgroundImage: `url(${movie?.backdropURLs.original})`}}>
                                     <Img src = {movie?.backdropURLs.original}/>
                                 </Movie>
-                                <MovieTitle>{movie.originalTitle}</MovieTitle>
+                                <MovieTitle>{movie.title}</MovieTitle>
                         </MovieContainer>  
                         )   
                     })}
