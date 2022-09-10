@@ -2,9 +2,9 @@ import { useSpring, animated, config } from 'react-spring'
 
 export const Bar =({width})=> {
     const styles = useSpring({
-        width:  width>0 ? `${width}%` : "0",
+        width:  width!==50 ? `${width}%` : "0",
         height: "1em",
-        backgroundColor:"pink",
+        backgroundColor:"black",
         config: config.molasses
     })    
     return ( 

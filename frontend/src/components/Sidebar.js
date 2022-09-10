@@ -3,10 +3,11 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { Context } from "./Context"
 import { FiChevronUp } from "react-icons/fi";
+import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
+import disneyLogo from "../img/disney-plus-5636.png"
 
 export const Sidebar = () => {
-    const {filtered} = useContext(Context)
-    console.log(filtered)
+    const {filtered, movies} = useContext(Context)
     const [fullPost, set] = useState()
     useEffect(()=> {
             fetch('/getposts')
@@ -34,10 +35,20 @@ export const Sidebar = () => {
                     Top Communities
                 </Title>
                 {result?.map((item, index) => {
-                    console.log(item[0])
                     return (
-                        <Rank>
-                            <Number>{index+1}<FiChevronUp/>{item[0].charAt(0).toUpperCase() + item[0].slice(1)}</Number>
+                        <Rank key={index}>
+                            <Number>{index+1}
+                                <FiChevronUp/>
+                            </Number>
+                            <Community>
+                                <>{item[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
+                                {item[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
+                                {item[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px"}} />}
+                                {item[0]==="prime" && <SiPrime style={{width:"32px", height:"32px"}} />}
+                                {item[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px"}}/>}
+                                </>
+                                <div style={{marginLeft:"10px"}}>  {item[0].charAt(0).toUpperCase() + item[0].slice(1)}</div>
+                            </Community>
                             <StyledLink to={`/community/${item[0]}`}>join</StyledLink>
                         </Rank>
                     )
@@ -48,13 +59,11 @@ export const Sidebar = () => {
                     Popular Movies
                 </Title>
                 <ItemContainer>
-                {filtered?.map((item, index) => {
+                {movies?.map((item, index) => {
                     return (
-                        // <ItemContainer>
-                            <Item>
-                                {item}
-                            </Item>
-                        // </ItemContainer>
+                            <ItemLink key={index} to={`/${item.imdbID}`}>
+                                {item.title}
+                            </ItemLink>
                     )
                 })}
                 </ItemContainer>
@@ -62,8 +71,26 @@ export const Sidebar = () => {
         </Wrapper>
     )
 }
-const Number = styled.div`
+const ItemLink = styled(Link)`
+font-size: 10px;
+border-radius: 8px;
+border: 1px solid black;
+padding: 5px 8px;
+margin-right: 10px;
+margin-bottom: 10px;
+text-decoration: none;
+color: black;
+&:visited{
+        color:black;
+    }
+`
+const Community = styled.div`
+display: flex;
+align-items: center;
+margin-left: -20px;
 width: 100px;
+`
+const Number = styled.div`
 align-items: center;
 `
 const Wrapper = styled.div`
@@ -94,24 +121,19 @@ const Rank = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-around;
+align-items: center;
+margin-bottom: 10px;
 `
 const ItemContainer = styled.div`
 display: flex;
 flex-flow: row wrap;
-`
-const Item = styled.div`
-font-size: 10px;
-border-radius: 8px;
-border: 1px solid black;
-padding: 5px 8px;
-margin-right: 10px;
-margin-bottom: 10px;
 `
 const StyledLink = styled(Link)`
 display: block;
 border: 1px solid black;
 border-radius: 8px;
 padding: 5px 8px;
+color: black;
 text-decoration: none;
 &:visited{
         color:black;

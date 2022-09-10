@@ -5,6 +5,7 @@ import { Community } from "./Community";
 import { Homepage } from "./Homepage";
 import { Header } from "./Header";
 import { Voting } from "./Voting";
+import { Single } from "./Single";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route exact path="/community" element={<Community/>}></Route>
           <Route path="/community/:community" element={<Community/>}></Route>
           <Route path="/voting" element={<Voting />}></Route>
+          <Route path="/:single" element={<Single />}></Route>
         </Routes>
     </>
   );

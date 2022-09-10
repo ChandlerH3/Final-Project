@@ -77,9 +77,12 @@ export const Homepage = () => {
         <Banner>
             <Content>
                     <p>Welcome to <span>The District</span></p>
+                    {isAuthenticated ? <button>Visit the Community</button>
+                    :
+                    <>
                     <p>Click below to vote your favourite streaming plateform</p>
-                    {isAuthenticated ? <button>Your community</button>
-                    : <LoginButton />}                
+                    <LoginButton />
+                    </>}                
             </Content>
             <SlideContainer>
                 <SlideBlock>

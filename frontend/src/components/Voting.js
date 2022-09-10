@@ -1,12 +1,12 @@
-
-import { useSpring, animated, config } from 'react-spring'
 import { useContext, useState } from 'react'
 import { Context } from './Context'
 import { Bar } from './Bar'
 import styled from 'styled-components'
+import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
+import disneyLogo from "../img/disney-plus-5636.png"
 
 export const Voting =({width})=> {
-    const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
+    const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, voted, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
     const [test, setTest] = useState(false)
     //votes calculation
     const votes = [nVote, dVote, pVote, aVote, hVote]
@@ -99,47 +99,84 @@ export const Voting =({width})=> {
             console.log("Error :", err);
             });
     }
+    console.log(voted)
     return ( 
         <Wrapper>
             {isAuthenticated ? 
             <>
-            <>
-            {streamingList?.map((item, index)=> {
-                return(
-                    <Container key={index}>
-                        {/* <Img src = {product.imageSrc}/> */}
-                        <p>{item.name} : {item.percentage}</p>
-                        <p>{item.vote}</p> 
-                        <p onClick={() => {handleClick(item.name)}} >Vote</p>
-                    </Container>
-                )
-            })}
-        </>
-
-            <Result>
-            { percentage.length>0 && percentage.map((item, index) => {
-                    return (
-                        <Bar key={index} width={item}/>
+                <List>
+                {streamingList?.map((item, index)=> {
+                    return(
+                        <Container key={index}>
+                            {/* <Img src = {product.imageSrc}/> */}
+                            <p>
+                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
+                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
+                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px"}} />}
+                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px"}} />}
+                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px"}}/>}
+                            </p>
+                            <Cart onClick={() => {handleClick(item.name)}} >{voted === undefined ? "Vote" : "Voted"}</Cart>
+                            
+                            <Result>
+                                    <Bar key={index} width={voted ? item.percentage : 50}/>
+                            </Result>
+                        </Container>
                     )
-                })
-                }
-            </Result>
+                })}
+                </List>
+
+                
             </>
             : <>loading</>}
         </Wrapper>
     )
 }
 
+const Cart = styled.p`
+text-align: center;
+border-radius: 8px;
+width:200px;
+transition: all 150ms ease-in-out;
+cursor: pointer;
+    &:active{
+        transform: scale(0.9);
+    }
+`
+const DisabledCart = styled.p`
+color: #ccc;
+background-color: #e7e7e7;
+padding:10px;
+text-align: center;
+border-radius: 8px;
+width:200px;
+font-size:20px;
+border:none;
+`
+const List = styled.div`
+display:flex;
+justify-content: center;
+`
+
 const Container = styled.div`
 display:flex;
 flex-direction: column;
+align-items: center;
+box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
+margin-left:20px;
+text-decoration: none;
+    &:visited{
+        color:black;
+    }
 `
 const Wrapper = styled.div`
-display:flex;
-justify-content: center;
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+gap:1.875rem;
+margin-top: 10px;
 `
 
 const Result = styled.div`
 display: flex;
 flex-direction: column;
-width: 50%;`
+width: 100%`

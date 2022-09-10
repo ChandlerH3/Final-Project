@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useContext } from "react"
 import { Context } from "./Context"
+import { Link } from "react-router-dom"
 
 export const ListBlock = () => {
     const {netflixD, merg} = useContext(Context)
@@ -28,18 +29,17 @@ export const ListBlock = () => {
     return (
         <>
         {netflixD && merg.map((item, index) =>{
-            const filtered = Object.values(item)[0]
             return (
             <List key={index}>
                 <Title>{Object.keys(item)}</Title>
                 <Feature>
-                    {filtered.map((movie, index)=>{
+                    {Object.values(item)[0].map((movie, index)=>{
                         return (
-                        <MovieContainer key={index}>
+                        <MovieContainer key={index} to={`/${movie.imdbID}`}>
                                 <Movie style={{backgroundImage: `url(${movie?.backdropURLs.original})`}}>
                                     <Img src = {movie?.backdropURLs.original}/>
                                 </Movie>
-                                <MovieTitle>{movie.title}</MovieTitle>
+                                <MovieTitle>{movie.originalTitle}</MovieTitle>
                         </MovieContainer>  
                         )   
                     })}
@@ -56,8 +56,13 @@ border-top: 1px solid black;
 padding-top: 10px;
 padding-bottom: 10px;
 `
-const MovieContainer = styled.div`
+const MovieContainer = styled(Link)`
+color:black;
 box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
+text-decoration: none;
+    &:visited{
+        color:black;
+    }
 `
 const List = styled.div`
 margin-bottom: 20px;
