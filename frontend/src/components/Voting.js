@@ -4,6 +4,8 @@ import { Bar } from './Bar'
 import styled from 'styled-components'
 import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
+import { Link } from 'react-router-dom';
+import wp from "../img/wp.jpg"
 
 export const Voting =({width})=> {
     const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, voted, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
@@ -99,63 +101,82 @@ export const Voting =({width})=> {
             console.log("Error :", err);
             });
     }
-    console.log(voted)
     return ( 
         <Wrapper>
             {isAuthenticated ? 
-            <>
+            <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
                 <List>
                 {streamingList?.map((item, index)=> {
                     return(
                         <Container key={index}>
-                            {/* <Img src = {product.imageSrc}/> */}
-                            <p>
-                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
-                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
-                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px"}} />}
-                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px"}} />}
-                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px"}}/>}
-                            </p>
-                            <Cart onClick={() => {handleClick(item.name)}} >{voted === undefined ? "Vote" : "Voted"}</Cart>
-                            
+                            <Img src={wp} />
+                            <Logo>
+                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px", borderRadius: "10%"}} />}
+                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px",borderRadius: "50%"}} />}
+                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px",borderRadius: "50%"}} />}
+                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px", borderRadius: "50%"}} />}
+                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", borderRadius: "50%"}}/>}
+                            </Logo>
+                            {voted === undefined ? <Vote onClick={() => {handleClick(item.name)}} > Vote</Vote>
+                                : <DisabledV>Vote</DisabledV>}
                             <Result>
-                                    <Bar key={index} width={voted ? item.percentage : 50}/>
+                                    <Bar key={index} width={voted ? item.percentage : 0}/>
                             </Result>
                         </Container>
                     )
                 })}
-                </List>
-
-                
-            </>
+                </List>   
+                {voted && <Suggestion>You voted {voted}. Click <StyledLink to={`/community/${voted.charAt(0).toLowerCase() + voted.slice(1)}`}>HERE</StyledLink> see what's popping in its' community</Suggestion>}
+            </div>
             : <>loading</>}
         </Wrapper>
     )
 }
-
-const Cart = styled.p`
-text-align: center;
+const Logo = styled.div`
+margin-top: -20px;
+border-radius: 50%;
+border: 1px solid black;
+padding: 10px;
+margin-bottom: 10px;
+`
+const StyledLink = styled(Link)`
+`
+const Suggestion = styled.div`
+border: 1px solid black;
+padding: 11px 15px;
+margin-top: 75px;
 border-radius: 8px;
-width:200px;
+`
+const Vote = styled.p`
+border: 1px solid black;
+border-radius: 8px;
+padding: 5px 8px;
 transition: all 150ms ease-in-out;
 cursor: pointer;
     &:active{
         transform: scale(0.9);
     }
+    margin-bottom: 10px;
 `
-const DisabledCart = styled.p`
-color: #ccc;
-background-color: #e7e7e7;
-padding:10px;
-text-align: center;
+const DisabledV = styled.p`
+color:grey;
+border: 1px solid grey;
 border-radius: 8px;
-width:200px;
-font-size:20px;
-border:none;
+padding: 5px 8px;
+transition: all 150ms ease-in-out;
+cursor: pointer;
+    &:active{
+        transform: scale(0.9);
+    }
+margin-bottom: 10px;
+`
+const Img = styled.img`
+width: 100%;
 `
 const List = styled.div`
 display:flex;
 justify-content: center;
+width: 100%;
 `
 
 const Container = styled.div`
@@ -164,6 +185,7 @@ flex-direction: column;
 align-items: center;
 box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
 margin-left:20px;
+width: 15%;
 text-decoration: none;
     &:visited{
         color:black;
@@ -179,4 +201,5 @@ margin-top: 10px;
 const Result = styled.div`
 display: flex;
 flex-direction: column;
-width: 100%`
+width: 100%;
+margin-bottom: 10px;`

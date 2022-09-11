@@ -9,8 +9,7 @@ export const Single = () => {
     const name = useParams()
     const {movies, genres} = useContext(Context)
     const filter = movies.findIndex((movie)=>movie.imdbID === name.single)
-    console.log(filter)
-    console.log(Object.keys(movies[filter].streamingInfo).length)
+
     return (
         <Wrapper>
             <Container>
