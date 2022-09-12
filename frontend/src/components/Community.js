@@ -8,10 +8,12 @@ import { useParams } from "react-router-dom"
 
 
 export const Community = () => {
-    const name = useParams()
-    const community = name.community
+    const params = useParams()
+    const community = params.community
+    console.log(community)
     const {post, setPost, setPostList, voted} = useContext(Context)
-    const { isAuthenticated } = useAuth0()
+    const { isAuthenticated, user } = useAuth0()
+   console.log(user)
     //timestamp
     let dateObj = new Date()
     let month = dateObj.getUTCMonth() + 1
@@ -22,23 +24,23 @@ export const Community = () => {
 
     //get postList from db
     useEffect(()=> {
-        if (Object.keys(name).length === 0){
+        if (Object.keys(params).length === 0){
             fetch('/getposts')
             .then((res)=>res.json())
             .then((data)=>{
                 setPostList(data.data)
             })
         }
-        if (Object.keys(name).length > 0){
+        if (Object.keys(params).length > 0){
             console.log("fetch each")
-            fetch(`/getposts/${name.community}`)
+            fetch(`/getposts/${params.community}`)
             .then((res)=>res.json())
             .then((data)=>{
                 setPostList(data.data)
             })
         }
         
-    }, [name])
+    }, [params])
 
     const handleSubmit = (e) => {
             fetch('/addPosts', {
@@ -48,6 +50,8 @@ export const Community = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                picture: user.picture,
+                user: user.nickname,
                 community: community,
                 post: post,
                 date: date
@@ -55,7 +59,7 @@ export const Community = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                fetch(`/getposts/${name.community}`)
+                fetch(`/getposts/${params.community}`)
                 .then((res)=>res.json())
                 .then((data)=>{
                     setPostList(data.data)
@@ -69,7 +73,7 @@ export const Community = () => {
         isAuthenticated ? 
         <Wrapper>
             <Home>
-            {Object.keys(name).length > 0 && 
+            {Object.keys(params).length > 0 && 
             <>
                 <textarea rows='10' cols='50' type='text' placeholder="What's happening?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
                     <ButtonDiv>

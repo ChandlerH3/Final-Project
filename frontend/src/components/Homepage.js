@@ -8,16 +8,40 @@ import disney from "../img/disney.jpg"
 import netflix from "../img/netflix.jpg"
 import hulu from "../img/hulu.jpg"
 import prime from "../img/prime.jpg"
+import { Link } from "react-router-dom"
+import { useTransition, animated, config } from 'react-spring'
 
 export const Homepage = () => {
-    const img = [apple, 
-    disney, 
-    netflix,
-    hulu,
-    prime
-];
-    const [index, setIndex] = useState(0);
+//     const slides = [
+//         { id: 0, url: apple },
+//         { id: 1, url: disney },
+//         { id: 2, url: netflix },
+//         { id: 3, url: hulu }, { id: 4, url: prime }
+// ];
+const slides = [ apple, disney, netflix, hulu, prime];
+    const [index, set] = useState(0);
     const {isAuthenticated} = useContext(Context)
+    const transitions = useTransition(index, {
+        key: index,
+        from: { opacity: 0,height:"600px",
+        backgroundSize: "cover",
+        display: "inlineBlock",
+        width:"800px",},
+        enter: { opacity: 1, height:"600px",
+        backgroundSize: "cover",
+        display: "inlineBlock",
+        width:"800px",},
+        leave: { opacity: 0,height:"600px",
+        backgroundSize: "cover",
+        display: "inlineBlock",
+        width:"800px", },
+        config: { duration: 2000 },
+        exitBeforeEnter: true,
+})
+    
+    //   const fragment = transition((style, item) => {
+    //     return <animated.div style={{style}}>{item.url}</animated.div>;
+    //   });
     // useEffect(() => {
     // setTimeout(() =>
     //     // setIndex((prevIndex) =>
@@ -26,58 +50,14 @@ export const Homepage = () => {
     //     {colors.length - index === 1 ? setIndex(0) : setIndex(index+1)}, 2000
     // );
     // }, []);
-    useEffect(() => void setInterval(() => setIndex(index => (index + 1) % 5), 3000), [])
-    const singleImg = img[3]
+    useEffect(() => void setInterval(() => set(state=> (state + 1) % 5), 2000), [])
 
     return (
-    //     <Wrapper>
-    //         {isAuthenticated ? 
-    //         <Streaming>
-    //         {streamingList?.map((item)=> {
-    //             return(
-    //                 <>
-    //                     <StyleLink key={item.id} to={`/${item.name.toLowerCase()}`}>
-    //                         {/* <Img src = {product.imageSrc}/> */}
-    //                         <div style={{backgroundColor: `${item.colors[0]}`}}></div>
-    //                         <Name>{item.name} : {item.percentage}</Name>
-    //                         <p>{item.vote}</p> 
-    //                     </StyleLink>
-    //                     {test ? 
-                        
-    //                     <p>voted</p> :
-    //                     <p onClick={() => {handleClick(item.name)}} >Vote</p>
-    //                     }
-    //                 </>
-    //             )
-    //         })}
-    //     </Streaming>
-    //     : 
-    //     <>
-    //     {percentage && streamingList.map((item) => {
-    //         return (
-    //             <VoteContainer>
-    //                 <VoteItem>
-    //                     <ItemName>{item.name}: </ItemName>   
-    //                     <BarDiv>
-    //                         <Bar width={item.percentage} />
-    //                         {item.percentage > 0 ? 
-    //                         <>{item.percentage}%</> :
-    //                         <>0</>}    
-    //                     </BarDiv>  
-    //                 </VoteItem>
-                    
-    //             </VoteContainer>
-    //         )
-    //     })}
-    //     </>
-    //     }
-        
-    // </Wrapper>
     <Wrapper>
         <Banner>
             <Content>
                     <p>Welcome to <span>The District</span></p>
-                    {isAuthenticated ? <button>Visit the Community</button>
+                    {isAuthenticated ? <Link to="/community">Visit the Community</Link>
                     :
                     <>
                     <p>Click below to vote your favourite streaming plateform</p>
@@ -86,7 +66,14 @@ export const Homepage = () => {
             </Content>
             <SlideContainer>
                 <SlideBlock>
-                    <Slides key={index} style={{backgroundImage: `url('${singleImg}')`}}></Slides>
+                    {transitions((style, i) => (
+        <animated.div
+          style={{
+            ...style,
+            backgroundImage: `url('${slides[i]}')`
+          }}
+        />
+      ))}
                 </SlideBlock>
             </SlideContainer>
         </Banner>
@@ -111,16 +98,17 @@ height: 100%;
 
 const SlideBlock = styled.div`
 white-space: nowrap;
-transition: ease 1000ms;
+-webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
+clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%); 
 `
 
 const Slides = styled.div`
-display: inline-block;
+/* display: inline-block;
 height:600px;
 width:800px;
 background-size: cover;
 -webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
-clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%);
+clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%); */
 `
 const Wrapper = styled.div`
 display: flex;

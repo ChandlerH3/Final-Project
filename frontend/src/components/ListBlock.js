@@ -5,41 +5,21 @@ import { Link } from "react-router-dom"
 
 export const ListBlock = () => {
     const {netflixD, merg} = useContext(Context)
-    // const nA = []
-    // const dA = []
-    // const pA = []
-    // const aA = []
-    // const hA = []
-    // if (netflixD.length > 0){
-    // for (let i = 0; i < 3; i++){
-    //     nA.push(netflixD[i])
-    //     dA.push(disneyD[i])
-    //     pA.push(primeD[i])
-    //     aA.push(appleD[i])
-    //     hA.push(huluD[i])
-    // }}
-    //     const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
-        // const merg = [{'Netflix': nA }]
-    // if (nA.length > 0 && dA.length > 0){
-    //     nA.forEach((movie)=>{
-    //         return merg.netflix = {...movie}
-    //     })
-    // }
 
     return (
         <>
-        {netflixD && merg.map((item, index) =>{
+        {netflixD && merg?.map((item, index) =>{
             return (
             <List key={index}>
                 <Title>{Object.keys(item)}</Title>
                 <Feature>
-                    {Object.values(item)[0].map((movie, index)=>{
+                    {Object.values(item)[0]?.map((movie, index)=>{
                         return (
-                        <MovieContainer key={index} to={`/${movie.imdbID}`}>
+                        <MovieContainer key={index} to={`/${movie?.imdbID}`}>
                                 <Movie style={{backgroundImage: `url(${movie?.backdropURLs.original})`}}>
                                     <Img src = {movie?.backdropURLs.original}/>
                                 </Movie>
-                                <MovieTitle>{movie.originalTitle}</MovieTitle>
+                                <MovieTitle>{movie?.originalTitle}</MovieTitle>
                         </MovieContainer>  
                         )   
                     })}

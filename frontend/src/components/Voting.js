@@ -6,6 +6,7 @@ import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
 import { Link } from 'react-router-dom';
 import wp from "../img/wp.jpg"
+import Loading from './Loading';
 
 export const Voting =({width})=> {
     const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, voted, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
@@ -128,7 +129,7 @@ export const Voting =({width})=> {
                 </List>   
                 {voted && <Suggestion>You voted {voted}. Click <StyledLink to={`/community/${voted.charAt(0).toLowerCase() + voted.slice(1)}`}>HERE</StyledLink> see what's popping in its' community</Suggestion>}
             </div>
-            : <>loading</>}
+            : <Loading />}
         </Wrapper>
     )
 }

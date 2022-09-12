@@ -16,8 +16,8 @@ const App = () => {
           <Route exact path="/" element={<Homepage/>}></Route>
           <Route exact path="/community" element={<Community/>}></Route>
           <Route path="/community/:community" element={<Community/>}></Route>
-          <Route path="/voting" element={<Voting />}></Route>
-          <Route path="/:single" element={<Single />}></Route>
+          <Route path="/voting" element={<Voting/>}></Route>
+          <Route path="/:single" element={<Single/>}></Route>
         </Routes>
     </>
   );

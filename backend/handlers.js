@@ -69,6 +69,8 @@ const patchVotes = async (req, res) => {
 const addPosts = async (req, res) => {
     const newPost = {
         id: uuidv4(),
+        picture: req.body.picture,
+        user: req.body.user,
         community: req.body.community,
         post: req.body.post,
         date: req.body.date

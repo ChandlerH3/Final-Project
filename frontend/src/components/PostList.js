@@ -4,26 +4,17 @@ import styled from "styled-components";
 import { Context } from "./Context";
 import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
+import { BsDot } from "react-icons/bs";
 
 export const PostList = () => {
     const {postList} = useContext(Context)
     return (
-        <TweetLink>
+        <Wrapper>
             <Title>
-                    {/* <Avatar src={tweet.author.avatarSrc} onClick={(e)=>{
-                        e.preventDefault();
-                        handleClick()} }>
-                        </Avatar> */}
                         <Content>
-                            {postList && postList.map((post) => {
+                            {postList && postList.map((post, index) => {
                                 return (
-                            // {/* <Bio onClick={(e)=>{
-                            //     e.preventDefault();
-                            //     handleClick()} }>
-                            //     <Name>{tweet.author.displayName}</Name>
-                            //     <Handle>@{tweet.author.handle}<BsDot style={{alignSelf: 'center'}}/>{moment(tweet.timestamp).format('MMMM Do')}</Handle>
-                            // </Bio> */}
-                            <Post >
+                            <Post key={index} >
                                 <StyledLink to={`/community/${post.community}`}>
                                 {post.community==="netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
                                 {post.community==="apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
@@ -32,16 +23,19 @@ export const PostList = () => {
                                 {post.community==="disney" && <img src={disneyLogo} style={{width:"48px", height:"48px"}}/>}
                                 </StyledLink>
                                 <Details key={post.id}>
-                                    <Handle>{post.date}</Handle>
-                                    <Feed>{post.post}</Feed>
+                                    <Bio style={{display:"flex"}}>
+                                        <Avatar src={post.picture} />
+                                        <Name>{post.user}</Name>
+                                        <Handle><BsDot style={{alignSelf: 'center'}}/>{post.date}</Handle>
+                                    </Bio>
+                                    <Feed>{post.post.charAt(0).toUpperCase() + post.post.slice(1)}</Feed>
                                 </Details>
                             </Post >
-                            
                                 )
                             })}
                         </Content>
             </Title>
-        </TweetLink>
+        </Wrapper>
     );
 }
 
@@ -62,6 +56,7 @@ border: 1px solid black;
 margin-bottom: 20px;
 display: flex;
 align-items: center;
+padding: 8px 10px;
 `
 const Bio = styled.div`
 display: flex;
@@ -77,7 +72,7 @@ margin-bottom: 10px;
 `
 
 const Name = styled.p`
-font-size: 1.1rem;
+font-size: 1rem;
 font-weight: bold;
 `
 
@@ -90,19 +85,12 @@ display:flex;`
 const Avatar = styled.img`
 border-radius: 50%;
 width: 50px;
-height: 50px;`
+height: 50px;
+margin-right:10px;`
 
 const Title = styled.div`
 display: flex;
 `
-const TweetImg = styled.img`
-border-radius: 20px;
-width: 800px;
-`
-
-const TweetLink = styled.div`
+const Wrapper = styled.div`
 width: 500px;
 `
-
-const Wrapper = styled.div`
-border-top: 1px solid lightgrey;`

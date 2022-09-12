@@ -9,9 +9,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
     const navigate = useNavigate();
 
     const onRedirectCallback = (appState) => {
-    navigate(window.location.pathname);
+    navigate(`${window.location.pathname}voting`);
     };
-    
     return (
     <Auth0Provider
         domain={domain}
