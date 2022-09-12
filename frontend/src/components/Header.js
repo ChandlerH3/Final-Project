@@ -1,8 +1,5 @@
-import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { Context } from "./Context"
-
 import AuthNav from './auth-nav';
 
 
@@ -11,7 +8,7 @@ export const Header = () => {
     const navigate = useNavigate()
     const handleClick = () => {
         navigate('/')
-    }
+    } 
     return (
         <>
             <Wrapper>
@@ -19,25 +16,37 @@ export const Header = () => {
                     <p onClick={handleClick}>The District</p>
                 </Container>
                 <Menu>
-                    <>
-                    <Link to="/community">Community</Link>
-                    </>
-                    <>
+                    <Div>
+                        <StyledLink to="/community">Community</StyledLink>
+                    </Div>
                     <AuthNav/>
-                    </>
                 </Menu>
             </Wrapper>
         </>
     )
 }
-
+const Div = styled.div`
+display: flex;
+flex-direction: column;
+`
+const StyledLink = styled(Link)`
+text-decoration: none;
+margin-right: 10px;
+opacity: 0.8;
+transition: all 150ms ease-in-out;
+    &:visited{
+        color:black;
+    }
+    &:hover{
+        opacity: 1;
+    }
+`
 const Wrapper = styled.div`
 display: flex;
 justify-content: space-between;
 width:100%;
 align-items: center;
-padding-top:20px;
-padding-bottom:20px;
+padding: 10px 10px;
 `
 const Container = styled.div`
 display: flex;
@@ -45,6 +54,8 @@ align-items: center;
 `
 
 const Menu = styled.div`
+display: flex;
+align-items: center;
 `
 
 const Input = styled.input`

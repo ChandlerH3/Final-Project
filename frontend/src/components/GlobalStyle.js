@@ -20,6 +20,8 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	font-family: 'Montserrat', sans-serif;
+	background-color: #17141E;
+	color: #B98F20;
 	margin: 0;
 	padding: 0;
 	border: 0;

@@ -112,16 +112,16 @@ export const Voting =({width})=> {
                         <Container key={index}>
                             <Img src={wp} />
                             <Logo>
-                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px", borderRadius: "10%"}} />}
-                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px",borderRadius: "50%"}} />}
-                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px",borderRadius: "50%"}} />}
-                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px", borderRadius: "50%"}} />}
-                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", borderRadius: "50%"}}/>}
+                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px", borderRadius: "10%", color:"black",backgroundColor:"transparent"}} />}
+                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px",borderRadius: "50%",color:"black",backgroundColor:"transparent"}} />}
+                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px",borderRadius: "50%",color:"black", padding:"3px",backgroundColor:"transparent"}} />}
+                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px", borderRadius: "50%", color:"black",padding:"3px", backgroundColor:"transparent"}} />}
+                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", borderRadius: "50%",color:"black", backgroundColor:"transparent"}}/>}
                             </Logo>
                             {voted === undefined ? <Vote onClick={() => {handleClick(item.name)}} > Vote</Vote>
                                 : <DisabledV>Vote</DisabledV>}
                             <Result>
-                                    <Bar key={index} width={voted ? item.percentage : 0}/>
+                                    <Bar key={index} width={voted && item.percentage}/>
                             </Result>
                         </Container>
                     )
@@ -139,6 +139,7 @@ border-radius: 50%;
 border: 1px solid black;
 padding: 10px;
 margin-bottom: 10px;
+background-color: white;
 `
 const StyledLink = styled(Link)`
 `

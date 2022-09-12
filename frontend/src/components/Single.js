@@ -45,21 +45,21 @@ export const Single = () => {
                             <p style={{fontWeight: "bolder"}}>Availabe on:</p>  
                         {Object.keys(movies[filter].streamingInfo).length === 1 ? 
                         <>
-                        {Object.keys(movies[filter].streamingInfo)[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                        {Object.keys(movies[filter].streamingInfo)[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                        {Object.keys(movies[filter].streamingInfo)[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                        {Object.keys(movies[filter].streamingInfo)[0]==="prime" && <SiPrime style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                        {Object.keys(movies[filter].streamingInfo)[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", marginRight:"10px"}}/>}
+                        {Object.keys(movies[filter].streamingInfo)[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                        {Object.keys(movies[filter].streamingInfo)[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                        {Object.keys(movies[filter].streamingInfo)[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                        {Object.keys(movies[filter].streamingInfo)[0]==="prime" && <SiPrime style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                        {Object.keys(movies[filter].streamingInfo)[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}}/>}
                         </>
                         :
                         movies[filter].streamingInfo.map((streaming, index)=> {
                                 return (
                                     <div key={index}>
-                                        {Object.keys(streaming)[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                                        {Object.keys(streaming)[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                                        {Object.keys(streaming)[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                                        {Object.keys(streaming)[0]==="prime" && <SiPrime style={{width:"32px", height:"32px", marginRight:"10px"}} />}
-                                        {Object.keys(streaming)[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", marginRight:"10px"}}/>}
+                                        {Object.keys(streaming)[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                                        {Object.keys(streaming)[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                                        {Object.keys(streaming)[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                                        {Object.keys(streaming)[0]==="prime" && <SiPrime style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}} />}
+                                        {Object.keys(streaming)[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent"}}/>}
                                     </div>
                                 )
                                 })

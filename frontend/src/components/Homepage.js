@@ -9,47 +9,32 @@ import netflix from "../img/netflix.jpg"
 import hulu from "../img/hulu.jpg"
 import prime from "../img/prime.jpg"
 import { Link } from "react-router-dom"
-import { useTransition, animated, config } from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 
 export const Homepage = () => {
-//     const slides = [
-//         { id: 0, url: apple },
-//         { id: 1, url: disney },
-//         { id: 2, url: netflix },
-//         { id: 3, url: hulu }, { id: 4, url: prime }
-// ];
 const slides = [ apple, disney, netflix, hulu, prime];
     const [index, set] = useState(0);
     const {isAuthenticated} = useContext(Context)
     const transitions = useTransition(index, {
         key: index,
-        from: { opacity: 0,height:"600px",
-        backgroundSize: "cover",
-        display: "inlineBlock",
-        width:"800px",},
-        enter: { opacity: 1, height:"600px",
-        backgroundSize: "cover",
-        display: "inlineBlock",
-        width:"800px",},
-        leave: { opacity: 0,height:"600px",
-        backgroundSize: "cover",
-        display: "inlineBlock",
-        width:"800px", },
-        config: { duration: 2000 },
+        from: { opacity: 0,
+            height:"600px",
+            backgroundSize: "cover",
+            display: "inlineBlock",
+            width:"800px",},
+        enter: { opacity: 1, 
+            height:"600px",
+            backgroundSize: "cover",
+            display: "inlineBlock",
+            width:"800px",},
+        leave: { opacity: 0,
+            height:"600px",
+            backgroundSize: "cover",
+            display: "inlineBlock",
+            width:"800px", },
+        config: { duration: 2000,mass: 1, tension: 210, friction: 20},
         exitBeforeEnter: true,
 })
-    
-    //   const fragment = transition((style, item) => {
-    //     return <animated.div style={{style}}>{item.url}</animated.div>;
-    //   });
-    // useEffect(() => {
-    // setTimeout(() =>
-    //     // setIndex((prevIndex) =>
-    //     // prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-    //     // ), 2000
-    //     {colors.length - index === 1 ? setIndex(0) : setIndex(index+1)}, 2000
-    // );
-    // }, []);
     useEffect(() => void setInterval(() => set(state=> (state + 1) % 5), 2000), [])
 
     return (
@@ -60,20 +45,19 @@ const slides = [ apple, disney, netflix, hulu, prime];
                     {isAuthenticated ? <Link to="/community">Visit the Community</Link>
                     :
                     <>
-                    <p>Click below to vote your favourite streaming plateform</p>
-                    <LoginButton />
+                    <LoginButton text="Log in to vote your favourite streaming platform"/>
                     </>}                
             </Content>
             <SlideContainer>
                 <SlideBlock>
                     {transitions((style, i) => (
         <animated.div
-          style={{
-            ...style,
-            backgroundImage: `url('${slides[i]}')`
-          }}
-        />
-      ))}
+            style={{
+                ...style,
+                backgroundImage: `url('${slides[i]}')`
+            }}
+            />
+        ))}
                 </SlideBlock>
             </SlideContainer>
         </Banner>
@@ -100,15 +84,6 @@ const SlideBlock = styled.div`
 white-space: nowrap;
 -webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
 clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%); 
-`
-
-const Slides = styled.div`
-/* display: inline-block;
-height:600px;
-width:800px;
-background-size: cover;
--webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
-clip-path: polygon(20% 0, 100% 0%, 100% 100%, 10% 100%); */
 `
 const Wrapper = styled.div`
 display: flex;
