@@ -3,7 +3,6 @@ import styled from "styled-components"
 import AuthNav from './auth-nav';
 
 
-
 export const Header = () => {
     const navigate = useNavigate()
     const handleClick = () => {
@@ -34,8 +33,9 @@ text-decoration: none;
 margin-right: 10px;
 opacity: 0.8;
 transition: all 150ms ease-in-out;
+color: #dcdeed;
     &:visited{
-        color:black;
+        color:#dcdeed;
     }
     &:hover{
         opacity: 1;
@@ -47,6 +47,7 @@ justify-content: space-between;
 width:100%;
 align-items: center;
 padding: 10px 10px;
+border-bottom: 2px solid #B98F20;
 `
 const Container = styled.div`
 display: flex;

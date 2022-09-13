@@ -16,11 +16,11 @@ export const PostList = () => {
                                 return (
                             <Post key={index} >
                                 <StyledLink to={`/community/${post.community}`}>
-                                {post.community==="netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
-                                {post.community==="apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
-                                {post.community==="hulu" && <SiHulu style={{width:"32px", height:"32px"}} />}
-                                {post.community==="prime" && <SiPrime style={{width:"32px", height:"32px"}} />}
-                                {post.community==="disney" && <img src={disneyLogo} style={{width:"48px", height:"48px"}}/>}
+                                {post.community==="netflix" && <SiNetflix style={{width:"50px", height:"50px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"10px" }} />}
+                                {post.community==="apple" && <SiAppletv style={{width:"50px", height:"50px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {post.community==="hulu" && <SiHulu style={{width:"50px", height:"50px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {post.community==="prime" && <SiPrime style={{width:"50px", height:"50px",color:"black", backgroundColor:"white", borderRadius: "50%", padding:"7px" }} />}
+                                {post.community==="disney" && <img src={disneyLogo} style={{width:"50px", height:"50px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }}/>}
                                 </StyledLink>
                                 <Details key={post.id}>
                                     <Bio style={{display:"flex"}}>
@@ -40,6 +40,7 @@ export const PostList = () => {
 }
 
 const StyledLink = styled(Link)`
+margin-right: 20px;
 display: block;
 text-decoration: none;
 width: 75px;
@@ -47,6 +48,7 @@ text-align: center;
 &:visited{
         color:black;
     }
+    border-right: 1px solid #B98F20;
 `
 const Details = styled.div`
 `

@@ -19,9 +19,10 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	font-family: 'Montserrat', sans-serif;
-	background-color: #17141E;
-	color: #B98F20;
+	font-family: 'Arimo', sans-serif;
+	background-color: #2e2f39;
+	color:#dcdeed;
+	/* color: #B98F20; yellow */
 	margin: 0;
 	padding: 0;
 	border: 0;

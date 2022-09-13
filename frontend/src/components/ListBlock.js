@@ -7,7 +7,8 @@ export const ListBlock = () => {
     const {netflixD, merg} = useContext(Context)
 
     return (
-        <>
+        <div style={{paddingTop: "30px",
+            backgroundColor:"black"}}>
         {netflixD && merg?.map((item, index) =>{
             return (
             <List key={index}>
@@ -27,14 +28,15 @@ export const ListBlock = () => {
             </List>
             ) 
         })}
-        </>
+        </div>
     )
 }
 const MovieTitle = styled.div`
-text-align:center;
-border-top: 1px solid black;
+text-align:left;
+border-top: 2px solid #B98F20;
 padding-top: 10px;
 padding-bottom: 10px;
+padding-left: 10px;
 `
 const MovieContainer = styled(Link)`
 color:black;
@@ -45,12 +47,16 @@ text-decoration: none;
     }
 `
 const List = styled.div`
-margin-bottom: 20px;
-margin-left: 50px;
-margin-right: 50px;
+padding-bottom: 20px;
+padding-left: 50px;
+padding-right: 50px;
+
 `
 const Title = styled.div`
 font-weight: bolder;
+font-size: 30px;
+padding-top: 20px;
+padding-bottom: 10px;
 `
 const Img = styled.img`
 align-self: center; 

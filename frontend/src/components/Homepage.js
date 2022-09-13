@@ -41,23 +41,24 @@ const slides = [ apple, disney, netflix, hulu, prime];
     <Wrapper>
         <Banner>
             <Content>
-                    <p>Welcome to <span>The District</span></p>
-                    {isAuthenticated ? <Link to="/community">Visit the Community</Link>
+                    <Title>Welcome to <span style={{fontStyle:"italic"}}>The District</span></Title>
+                    <p style={{fontSize: "30px", width:"500px", textAlign:"left", marginTop: "15px", lineHeight:"1.1", marginBottom:"40px", color:"#B98F20"}}>share your experience with your favourite streaming platform</p>
+                    {isAuthenticated ? <StyledLink to="/community">Visit the Community</StyledLink>
                     :
                     <>
-                    <LoginButton text="Log in to vote your favourite streaming platform"/>
+                    <LoginButton text="Log in to Vote"/>
                     </>}                
             </Content>
             <SlideContainer>
                 <SlideBlock>
                     {transitions((style, i) => (
-        <animated.div
-            style={{
-                ...style,
-                backgroundImage: `url('${slides[i]}')`
-            }}
-            />
-        ))}
+                        <animated.div
+                            style={{
+                                ...style,
+                                backgroundImage: `url('${slides[i]}')`
+                            }}
+                            />
+                        ))}
                 </SlideBlock>
             </SlideContainer>
         </Banner>
@@ -65,14 +66,23 @@ const slides = [ apple, disney, netflix, hulu, prime];
     </Wrapper>
     )
 }
-
+const StyledLink = styled(Link)`
+color:#B98F20;
+font-size:30px;
+    &:visited{
+        color:#B98F20;
+    }`
+const Title = styled.div`
+font-size: 48px;
+text-align: left;
+`
 const Content = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 text-align: center;
-padding-left: 100px;
+margin-left: 80px;
 `
 const SlideContainer = styled.div`
 margin: 0;
@@ -93,10 +103,9 @@ const Banner = styled.div`
 display: flex;
 height: 520px;
 justify-content: space-between;
-align-items: stretch;
 padding: 0;
 margin: 0;
-
+width: 100%;
 `
 // const BarDiv = styled.div`
 // width: 100%;

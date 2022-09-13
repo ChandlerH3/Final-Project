@@ -19,5 +19,10 @@ const Button = styled.button`
 border: 1px solid black;
 border-radius: 18px;
 padding: 10px 15px;
-cursor: pointer;`
+cursor: pointer;
+opacity: 0.8;
+transition: all 150ms ease-in-out;
+    &:hover{
+        opacity: 1;
+    }`
 export default LoginButton;

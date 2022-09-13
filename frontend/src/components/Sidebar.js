@@ -7,7 +7,19 @@ import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
 
 export const Sidebar = () => {
-    const {filtered, movies} = useContext(Context)
+    const {merg, genres, netflixD} = useContext(Context)
+    const movies = []
+    if (netflixD) {
+    merg.map((item)=> {
+        Object.values(item).forEach((movie) => {
+            movie.forEach((each) => {
+                movies.push(each)
+            })
+            
+        })
+    }
+        )
+    }
     const [fullPost, set] = useState()
     useEffect(()=> {
             fetch('/getposts')
@@ -37,15 +49,16 @@ export const Sidebar = () => {
                 {result?.map((item, index) => {
                     return (
                         <Rank key={index}>
-                            <Number>{index+1}
-                                <FiChevronUp/>
+                            <Number>
+                                <>{index+1}</>
+                                <FiChevronUp style ={{color:"white", backgroundColor:"transparent"}}/>
                             </Number>
                             <Community>
-                                <>{item[0]==="netflix" && <SiNetflix style={{width:"32px", height:"32px"}} />}
-                                {item[0]==="apple" && <SiAppletv style={{width:"32px", height:"32px"}} />}
-                                {item[0]==="hulu" && <SiHulu style={{width:"32px", height:"32px"}} />}
-                                {item[0]==="prime" && <SiPrime style={{width:"32px", height:"32px"}} />}
-                                {item[0]==="disney" && <img src={disneyLogo} style={{width:"32px", height:"32px"}}/>}
+                                <>{item[0]==="netflix" && <SiNetflix style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="apple" && <SiAppletv style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="hulu" && <SiHulu style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="prime" && <SiPrime style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%", padding:"7px" }} />}
+                                {item[0]==="disney" && <img src={disneyLogo} style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }}/>}
                                 </>
                                 <div style={{marginLeft:"10px"}}>  {item[0].charAt(0).toUpperCase() + item[0].slice(1)}</div>
                             </Community>
@@ -59,10 +72,10 @@ export const Sidebar = () => {
                     Popular Movies
                 </Title>
                 <ItemContainer>
-                {movies?.map((item, index) => {
+                {movies?.map((item, index) => {      
                     return (
-                            <ItemLink key={index} to={`/${item.imdbID}`}>
-                                {item.title}
+                            <ItemLink key={index} to={`/${item?.imdbID}`}>
+                                {item?.title}
                             </ItemLink>
                     )
                 })}
@@ -79,9 +92,10 @@ padding: 5px 8px;
 margin-right: 10px;
 margin-bottom: 10px;
 text-decoration: none;
-color: black;
+color: white;
+background-color: #B98F20;
 &:visited{
-        color:black;
+        color:white;
     }
 `
 const Community = styled.div`
@@ -92,6 +106,7 @@ width: 100px;
 `
 const Number = styled.div`
 align-items: center;
+color: #B98F20;
 `
 const Wrapper = styled.div`
 display:flex;
@@ -129,13 +144,19 @@ display: flex;
 flex-flow: row wrap;
 `
 const StyledLink = styled(Link)`
-display: block;
 border: 1px solid black;
-border-radius: 8px;
-padding: 5px 8px;
-color: black;
+border-radius: 18px;
+padding: 10px 15px;
+cursor: pointer;
+opacity: 0.8;
+background-color: white;
+color:black;
 text-decoration: none;
-&:visited{
+transition: all 150ms ease-in-out;
+    &:hover{
+        opacity: 1;
+    }
+    &:visited{
         color:black;
     }
 `

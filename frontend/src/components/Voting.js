@@ -112,16 +112,16 @@ export const Voting =({width})=> {
                         <Container key={index}>
                             <Img src={wp} />
                             <Logo>
-                                    {item.name ==="Netflix" && <SiNetflix style={{width:"32px", height:"32px", borderRadius: "10%", color:"black",backgroundColor:"transparent"}} />}
-                                    {item.name==="Apple" && <SiAppletv style={{width:"32px", height:"32px",borderRadius: "50%",color:"black",backgroundColor:"transparent"}} />}
-                                    {item.name==="Hulu" && <SiHulu style={{width:"32px", height:"32px",borderRadius: "50%",color:"black", padding:"3px",backgroundColor:"transparent"}} />}
-                                    {item.name==="Prime" && <SiPrime style={{width:"32px", height:"32px", borderRadius: "50%", color:"black",padding:"3px", backgroundColor:"transparent"}} />}
-                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"32px", height:"32px", borderRadius: "50%",color:"black", backgroundColor:"transparent"}}/>}
+                                    {item.name ==="Netflix" && <SiNetflix style={{width:"40px", height:"32px", borderRadius: "10%", color:"black",backgroundColor:"transparent"}} />}
+                                    {item.name==="Apple" && <SiAppletv style={{width:"40px", height:"32px",borderRadius: "50%",color:"black",backgroundColor:"transparent"}} />}
+                                    {item.name==="Hulu" && <SiHulu style={{width:"40px", height:"32px",borderRadius: "50%",color:"black", padding:"3px",backgroundColor:"transparent"}} />}
+                                    {item.name==="Prime" && <SiPrime style={{width:"40px", height:"32px", borderRadius: "50%", color:"black",padding:"3px", backgroundColor:"transparent"}} />}
+                                    {item.name==="Disney" && <img src={disneyLogo} style={{width:"40px", height:"32px", borderRadius: "50%",color:"black", backgroundColor:"transparent"}}/>}
                             </Logo>
                             {voted === undefined ? <Vote onClick={() => {handleClick(item.name)}} > Vote</Vote>
-                                : <DisabledV>Vote</DisabledV>}
+                                : <DisabledV>Voted</DisabledV>}
                             <Result>
-                                    <Bar key={index} width={voted && item.percentage}/>
+                                    <Bar key={index} width={voted && item.percentage} text="%"/>
                             </Result>
                         </Container>
                     )
@@ -142,23 +142,34 @@ margin-bottom: 10px;
 background-color: white;
 `
 const StyledLink = styled(Link)`
+background-color:#dcdeed;
+color:#B98F20;
+font-style: italic;
 `
 const Suggestion = styled.div`
 border: 1px solid black;
-padding: 11px 15px;
+padding: 15px;
 margin-top: 75px;
 border-radius: 8px;
+color:black;
+background-color:#dcdeed ;
 `
 const Vote = styled.p`
-border: 1px solid black;
-border-radius: 8px;
-padding: 5px 8px;
-transition: all 150ms ease-in-out;
-cursor: pointer;
+background-color: #dcdeed;
+color: black;
     &:active{
         transform: scale(0.9);
     }
     margin-bottom: 10px;
+    border: 1px solid black;
+border-radius: 18px;
+padding: 10px 15px;
+cursor: pointer;
+opacity: 0.8;
+transition: all 150ms ease-in-out;
+    &:hover{
+        opacity: 1;
+    }
 `
 const DisabledV = styled.p`
 color:grey;
@@ -179,6 +190,7 @@ const List = styled.div`
 display:flex;
 justify-content: center;
 width: 100%;
+margin-top: 30px;
 `
 
 const Container = styled.div`
