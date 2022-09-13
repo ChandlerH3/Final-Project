@@ -5,6 +5,7 @@ import { Context } from "./Context"
 import { FiChevronUp } from "react-icons/fi";
 import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
+import Loading from "./Loading";
 
 export const Sidebar = () => {
     const {merg, genres, netflixD} = useContext(Context)
@@ -46,7 +47,7 @@ export const Sidebar = () => {
                 <Title>
                     Top Communities
                 </Title>
-                {result?.map((item, index) => {
+                {result.length ? result.map((item, index) => {
                     return (
                         <Rank key={index}>
                             <Number>
@@ -54,10 +55,10 @@ export const Sidebar = () => {
                                 <FiChevronUp style ={{color:"white", backgroundColor:"transparent"}}/>
                             </Number>
                             <Community>
-                                <>{item[0]==="netflix" && <SiNetflix style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
-                                {item[0]==="apple" && <SiAppletv style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
-                                {item[0]==="hulu" && <SiHulu style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
-                                {item[0]==="prime" && <SiPrime style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%", padding:"7px" }} />}
+                                <>{item[0]==="netflix" && <SiNetflix style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="apple" && <SiAppletv style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="hulu" && <SiHulu style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
+                                {item[0]==="prime" && <SiPrime style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%", padding:"7px" }} />}
                                 {item[0]==="disney" && <img src={disneyLogo} style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }}/>}
                                 </>
                                 <div style={{marginLeft:"10px"}}>  {item[0].charAt(0).toUpperCase() + item[0].slice(1)}</div>
@@ -65,7 +66,10 @@ export const Sidebar = () => {
                             <StyledLink to={`/community/${item[0]}`}>join</StyledLink>
                         </Rank>
                     )
-                })}   
+                })  
+                : <div style={{display: "flex",
+                justifyContent: "center"}}><Loading /></div>
+            } 
             </Top>
             <Popular>
                 <Title>
@@ -92,10 +96,10 @@ padding: 5px 8px;
 margin-right: 10px;
 margin-bottom: 10px;
 text-decoration: none;
-color: white;
-background-color: #B98F20;
+background-color:#dcdeed;
+color: black;
 &:visited{
-        color:white;
+        color: black;
     }
 `
 const Community = styled.div`
@@ -118,14 +122,14 @@ const Top = styled.div`
 display:flex;
 flex-direction: column;
 margin-bottom: 20px;
-border: 1px solid black;
+border: 1px solid #B98F20;
 padding: 10px;
 border-radius: 1px;
 `
 const Popular = styled.div`
 display:flex;
 flex-direction: column;
-border: 1px solid black;
+border: 1px solid #B98F20;
 padding: 10px;
 border-radius: 1px;
 `

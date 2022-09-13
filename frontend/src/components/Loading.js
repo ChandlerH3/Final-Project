@@ -1,16 +1,25 @@
-import React from "react";
 import styled from "styled-components";
-const loadingImg =
-"https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg";
 
 const Loading = () => {
     return(
         <Wrapper>
-            <img src={loadingImg} alt="Loading..." />
         </Wrapper>
     )
     }
 const Wrapper = styled.div`
-text-align: center;
+border: 10px solid #dcdeed;
+border-top: 10px solid #B98F20;
+border-radius: 50%;
+width: 80px;
+height: 80px;
+animation: spin 1s linear infinite;
+@keyframes spin {
+0% {
+transform: rotate(0deg);
+}
+100% {
+transform: rotate(360deg);
+}
+} 
 `
 export default Loading;

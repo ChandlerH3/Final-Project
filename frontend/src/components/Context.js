@@ -342,8 +342,6 @@ const merg = [{'Netflix': nA },{"Disney": dA}]
             voteResult,
             setVoteResult,
             merg,
-            // filtered,
-            // movies
         }}
         >
         {children}

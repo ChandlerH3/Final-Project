@@ -8,7 +8,7 @@ export const ListBlock = () => {
 
     return (
         <div style={{paddingTop: "30px",
-            backgroundColor:"black"}}>
+            backgroundColor:"#1e1e1c"}}>
         {netflixD && merg?.map((item, index) =>{
             return (
             <List key={index}>

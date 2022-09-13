@@ -129,7 +129,8 @@ export const Voting =({width})=> {
                 </List>   
                 {voted && <Suggestion>You voted {voted}. Click <StyledLink to={`/community/${voted.charAt(0).toLowerCase() + voted.slice(1)}`}>HERE</StyledLink> see what's popping in its' community</Suggestion>}
             </div>
-            : <Loading />}
+            : <div style={{display: "flex",
+                justifyContent: "center"}}><Loading /></div>}
         </Wrapper>
     )
 }
@@ -209,7 +210,9 @@ const Wrapper = styled.div`
 display:grid;
 grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
 gap:1.875rem;
-margin-top: 10px;
+padding-top:50px;
+padding-bottom: 100px;
+border-bottom: 2px solid #B98F20;
 `
 
 const Result = styled.div`

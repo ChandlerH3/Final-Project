@@ -27,6 +27,7 @@ export const Header = () => {
 const Div = styled.div`
 display: flex;
 flex-direction: column;
+margin-right: 10px;
 `
 const StyledLink = styled(Link)`
 text-decoration: none;
@@ -46,8 +47,9 @@ display: flex;
 justify-content: space-between;
 width:100%;
 align-items: center;
-padding: 10px 10px;
+padding: 15px;
 border-bottom: 2px solid #B98F20;
+font-size:20px;
 `
 const Container = styled.div`
 display: flex;

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext} from "react"
 import styled from "styled-components"
 import { Context } from "./Context"
 import { ListBlock } from "./ListBlock"
-import LoginButton from "./login-button"
+import { BiArrowToRight } from "react-icons/bi";
 import apple from "../img/apple.jpg"
 import disney from "../img/disney.jpg"
 import netflix from "../img/netflix.jpg"
@@ -10,8 +10,10 @@ import hulu from "../img/hulu.jpg"
 import prime from "../img/prime.jpg"
 import { Link } from "react-router-dom"
 import { useTransition, animated } from 'react-spring'
+import { useAuth0 } from "@auth0/auth0-react"
 
 export const Homepage = () => {
+    const { loginWithRedirect } = useAuth0();
 const slides = [ apple, disney, netflix, hulu, prime];
     const [index, set] = useState(0);
     const {isAuthenticated} = useContext(Context)
@@ -41,13 +43,15 @@ const slides = [ apple, disney, netflix, hulu, prime];
     <Wrapper>
         <Banner>
             <Content>
-                    <Title>Welcome to <span style={{fontStyle:"italic"}}>The District</span></Title>
-                    <p style={{fontSize: "30px", width:"500px", textAlign:"left", marginTop: "15px", lineHeight:"1.1", marginBottom:"40px", color:"#B98F20"}}>share your experience with your favourite streaming platform</p>
-                    {isAuthenticated ? <StyledLink to="/community">Visit the Community</StyledLink>
+                    <Title>This is <span style={{fontStyle:"italic"}}>The District</span></Title>
+                    <p style={{fontSize: "24px", width:"550px", textAlign:"left", marginTop: "15px", lineHeight:"1.1", marginBottom:"40px", color:"#B98F20"}}>share your experience with your favourite streaming platform</p>
+                    {isAuthenticated ? <StyledLink to="/community">Visit the Community<BiArrowToRight style={{backgroundColor:"transparent"}}/></StyledLink>
                     :
-                    <>
-                    <LoginButton text="Log in to Vote"/>
-                    </>}                
+                    <Login onClick={() => loginWithRedirect({
+                        appState: {
+                            returnTo: window.location.origin
+                        }
+                    })}>Log in &amp; Start voting<BiArrowToRight style={{backgroundColor:"transparent"}}/></Login>  }        
             </Content>
             <SlideContainer>
                 <SlideBlock>
@@ -65,13 +69,34 @@ const slides = [ apple, disney, netflix, hulu, prime];
         <ListBlock />
     </Wrapper>
     )
-}
+} 
+const Login = styled.div`
+color:#B98F20;
+font-size:24px;
+text-decoration:none;
+border-bottom:1px solid #B98F20;
+padding-bottom:5px;
+text-align: center;
+width: 52%;
+display: flex;
+align-items: center;
+justify-content: space-around;
+`
 const StyledLink = styled(Link)`
 color:#B98F20;
-font-size:30px;
+font-size:24px;
+text-decoration:none;
+border-bottom:1px solid #B98F20;
+padding-bottom:5px;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: space-around;
+width: 52%;
     &:visited{
         color:#B98F20;
-    }`
+    }
+`
 const Title = styled.div`
 font-size: 48px;
 text-align: left;
@@ -79,10 +104,8 @@ text-align: left;
 const Content = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
 justify-content: center;
-text-align: center;
-margin-left: 80px;
+margin-right: -80px;
 `
 const SlideContainer = styled.div`
 margin: 0;
@@ -102,7 +125,7 @@ flex-direction: column;
 const Banner = styled.div`
 display: flex;
 height: 520px;
-justify-content: space-between;
+justify-content: right;
 padding: 0;
 margin: 0;
 width: 100%;

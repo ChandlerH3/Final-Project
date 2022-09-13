@@ -69,6 +69,7 @@ const patchVotes = async (req, res) => {
 const addPosts = async (req, res) => {
     const newPost = {
         id: uuidv4(),
+        likes: req.body.likes,
         picture: req.body.picture,
         user: req.body.user,
         community: req.body.community,
@@ -111,7 +112,7 @@ const getEachCommunityPosts = async (req, res) => {
         await client.connect();
         const db = client.db("The_District");
 
-        const result = await db.collection("posts").find({community: community}).toArray();
+        const result = await db.collection("posts").find({community: community}).sort({ _id: -1 }).toArray();
         result ? res.status(200).json({ status: 200, data: result }) 
         : res.status(404).json({ status: 404, data: "Not Found" });
         client.close();
@@ -120,11 +121,37 @@ const getEachCommunityPosts = async (req, res) => {
         }
 };
 
+const patchLikes = async (req, res) => {
+    const likes = req.body.likes
+    const id = req.body.id
+    const query = { id: id };
+    if (!likes){
+        res.status(400).json({
+            status: 400, message: 'unable to update due to key missing',
+        });
+    }
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+            const newValues = { $set: { "posts.likes": likes }};
+            await client.connect();
+
+            const db = client.db('The_District');
+            const find = await db.collection("posts").findOne(query);
+            await db.collection("posts").updateOne(query, newValues,);
+
+            res.status(200).json({ status: 200, likes, data: find});
+            client.close();
+        } catch (err) {
+            res.status(500).json({ status: 500, message: err.message });
+        }
+};
+
 
 module.exports = {
     getPosts,
     getEachCommunityPosts,
     addPosts,
+    patchLikes,
     addVotes,
     getVotes,
     patchVotes

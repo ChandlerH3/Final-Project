@@ -1,4 +1,4 @@
-import { useContext, useEffect} from "react"
+import { useContext, useEffect, useState} from "react"
 import { Context } from "./Context"
 import styled from "styled-components"
 import { PostList } from "./PostList"
@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
 export const Community = () => {
     const params = useParams()
     const community = params.community
-    const {post, setPost, setPostList, voted} = useContext(Context)
+    const {post, setPost, setPostList, voted, l} = useContext(Context)
     const { isAuthenticated, user } = useAuth0()
     //timestamp
     let dateObj = new Date()
@@ -48,6 +48,7 @@ export const Community = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                likes: l,
                 picture: user.picture,
                 user: user.nickname,
                 community: community,
@@ -73,7 +74,7 @@ export const Community = () => {
             <Home>
             {Object.keys(params).length > 0 && 
             <>
-                <textarea rows='10' cols='50' type='text' placeholder="What's happening?" style={{}} onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
+                <textarea rows='5' cols='50' type='text' placeholder="What's steaming?" style={{}} onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
                 <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </>
 }

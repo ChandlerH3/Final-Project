@@ -21,6 +21,7 @@ border-radius: 18px;
 padding: 10px 15px;
 cursor: pointer;
 opacity: 0.8;
+font-size: 18px;
 transition: all 150ms ease-in-out;
     &:hover{
         opacity: 1;

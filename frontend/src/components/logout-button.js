@@ -20,6 +20,7 @@ border: 1px solid black;
 border-radius: 18px;
 padding: 10px 15px;
 cursor: pointer;
+font-size:18px;
 transition: all 150ms ease-in-out;
 opacity: 0.8;
     &:hover{
