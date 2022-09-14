@@ -8,7 +8,7 @@ import { BsDot } from "react-icons/bs";
 import ActionBar from "./ActionBar";
 import Loading from "./Loading";
 
-export const PostList = () => {
+export const PostList = ({handle, params}) => {
     const {postList} = useContext(Context)
     return (
         <Wrapper>
@@ -30,7 +30,7 @@ export const PostList = () => {
                                         <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
                                     </Bio>
                                     <Feed>{post.post.charAt(0).toUpperCase() + post.post.slice(1)}</Feed>
-                                    <ActionBar id={post.id}/>
+                                    <ActionBar id={post.id} number={post.likes} handle={handle} params={params}/>
                                 </Details>
                             </Post >
                                 )

@@ -125,21 +125,18 @@ const patchLikes = async (req, res) => {
     const likes = req.body.likes
     const id = req.body.id
     const query = { id: id };
-    if (!likes){
-        res.status(400).json({
-            status: 400, message: 'unable to update due to key missing',
-        });
-    }
+    console.log(id)
     try {
         const client = new MongoClient(MONGO_URI, options);
-            const newValues = { $set: { "posts.likes": likes }};
+            const newValues = { $set: { "likes": likes }};
             await client.connect();
 
             const db = client.db('The_District');
+            await db.collection("posts").updateOne(query, newValues);
             const find = await db.collection("posts").findOne(query);
-            await db.collection("posts").updateOne(query, newValues,);
 
-            res.status(200).json({ status: 200, likes, data: find});
+            find ? res.status(200).json({ status: 200, likes, data: find})
+            : res.status(404).json({ status: 404, data: "Not Found" });
             client.close();
         } catch (err) {
             res.status(500).json({ status: 500, message: err.message });

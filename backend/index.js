@@ -14,7 +14,7 @@ express()
     .post('/addposts', addPosts)
     .get('/getposts', getPosts)
     .get('/getposts/:community', getEachCommunityPosts)
-    // .patch('/patchLikes', patchLikes)
+    .patch('/patchLikes', patchLikes)
     
     .post('/addvotes', addVotes)
     .get('/getvotes', getVotes)

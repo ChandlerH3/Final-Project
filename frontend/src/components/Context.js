@@ -15,6 +15,8 @@ export const Provider = ({ children }) => {
     const [post, setPost] = useState("")
     const [voted, setVoted] = useState()
     const [postList, setPostList] = useState()
+    const [l, setL] = useState(0)
+    const [topic, setTopic] = useState()
 
     const [nVote, setNVote] = useState(0)
     const [dVote, setDVote] = useState(0)
@@ -342,6 +344,10 @@ const merg = [{'Netflix': nA },{"Disney": dA}]
             voteResult,
             setVoteResult,
             merg,
+            l,
+            setL,
+            topic,
+            setTopic
         }}
         >
         {children}

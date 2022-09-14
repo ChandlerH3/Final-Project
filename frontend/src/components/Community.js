@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
 export const Community = () => {
     const params = useParams()
     const community = params.community
-    const {post, setPost, setPostList, voted, l} = useContext(Context)
+    const {post, setPost, setPostList, topic, l} = useContext(Context)
     const { isAuthenticated, user } = useAuth0()
     //timestamp
     let dateObj = new Date()
@@ -18,7 +18,6 @@ export const Community = () => {
     let day = dateObj.getUTCDate()
     let year = dateObj.getUTCFullYear()
     const date = year + "/" + month + "/" + day
-
 
     //get postList from db
     useEffect(()=> {
@@ -74,11 +73,11 @@ export const Community = () => {
             <Home>
             {Object.keys(params).length > 0 && 
             <>
-                <textarea rows='5' cols='50' type='text' placeholder="What's steaming?" style={{}} onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}></textarea>
+                <textarea value= {topic && `@${topic}`} rows='5' cols='50' type='text' placeholder="What's steaming?" style={{}} onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}} />
                 <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </>
 }
-                <PostList />
+                <PostList params={params} />
             </Home>
             <Sidebar />
         </Wrapper>

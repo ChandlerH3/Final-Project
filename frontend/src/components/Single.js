@@ -1,13 +1,14 @@
 import { useContext } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Context } from "./Context"
 import styled from "styled-components"
-import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
+import { SiPrime, SiNetflix, SiAppletv, SiHulu, SiSlideshare} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
 
 export const Single = () => {
+    const navigate = useNavigate()
     const name = useParams()
-    const {merg, genres, netflixD} = useContext(Context)
+    const {merg, genres, netflixD, setTopic} = useContext(Context)
     const movies = []
     if (netflixD) {
     merg.map((item)=> {
@@ -30,10 +31,15 @@ export const Single = () => {
                 <Container>
                     <Img src = {movies[filter].posterURLs.original}/>
                     <Right>
+                        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                         <Title>
                             <Name>{movies[filter].originalTitle}</Name>
                             <p>{movies[filter].year}</p>
                         </Title>
+                        <SiSlideshare style={{backgroundColor:"transparent", color:"#B98F20"}} onClick={()=>{setTopic(movies[filter].originalTitle)
+                            navigate("/community")}} />
+                        </div>
+                        
                         <Genre>{movies[filter].genres.map((genre, index)=> {
                                 return (
                                         <Pill key={index}>{genres[genre]}</Pill>
