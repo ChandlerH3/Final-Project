@@ -93,12 +93,13 @@ export const Community = () => {
 const Wrapper = styled.div`
 display:flex;
 justify-content: center;
-margin-top: 30px;
 `
 const Home = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
+padding-top: 30px;
+background-color: #B98F20;
 `
 
 const Button = styled.button`
@@ -112,7 +113,8 @@ border: none;
 color: white;
 &:disabled{
     opacity: 0.5;
-    border: none;
+    background-color:#dcdeed;
+    color: black;
 }`
 
 const P = styled.p`

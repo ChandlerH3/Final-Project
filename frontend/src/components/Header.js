@@ -30,8 +30,9 @@ flex-direction: column;
 margin-right: 10px;
 `
 const StyledLink = styled(Link)`
+font-weight: bolder;
 text-decoration: none;
-margin-right: 10px;
+margin-right: 20px;
 opacity: 0.8;
 transition: all 150ms ease-in-out;
 color: #dcdeed;
@@ -54,6 +55,7 @@ font-size:20px;
 const Container = styled.div`
 display: flex;
 align-items: center;
+font-weight: bolder;
 `
 
 const Menu = styled.div`

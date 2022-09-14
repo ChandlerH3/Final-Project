@@ -12,7 +12,6 @@ export const PostList = () => {
     const {postList} = useContext(Context)
     return (
         <Wrapper>
-            <Title>
                         <Content>
                             {postList ? postList.map((post, index) => {
                                 return (
@@ -40,7 +39,6 @@ export const PostList = () => {
                             justifyContent: "center"}}><Loading /></div>
                         }
                         </Content>
-            </Title>
         </Wrapper>
     );
 }
@@ -74,6 +72,7 @@ margin-bottom: 10px;
 const Content = styled.div`
 margin-left:10px;
 width:100%;
+background-color: #B98F20;
 `
 const Feed = styled.p`
 margin-bottom: 10px;
@@ -97,9 +96,8 @@ width: 50px;
 height: 50px;
 margin-right:10px;`
 
-const Title = styled.div`
-display: flex;
-`
 const Wrapper = styled.div`
 width: 500px;
+background-color: #B98F20;
+padding-left: 20px;
 `

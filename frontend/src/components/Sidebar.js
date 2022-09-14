@@ -89,10 +89,10 @@ export const Sidebar = () => {
     )
 }
 const ItemLink = styled(Link)`
-font-size: 10px;
+font-size: 12px;
 border-radius: 8px;
 border: 1px solid black;
-padding: 5px 8px;
+padding: 10px 12px;
 margin-right: 10px;
 margin-bottom: 10px;
 text-decoration: none;
@@ -116,7 +116,10 @@ const Wrapper = styled.div`
 display:flex;
 flex-direction: column;
 width:30%;
-margin-left: 20px;
+padding-left: 20px;
+padding-top: 30px;
+padding-right: 30px;
+background-color: #B98F20;
 `
 const Top = styled.div`
 display:flex;

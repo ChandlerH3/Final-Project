@@ -43,8 +43,8 @@ const slides = [ apple, disney, netflix, hulu, prime];
     <Wrapper>
         <Banner>
             <Content>
-                    <Title>This is <span style={{fontStyle:"italic"}}>The District</span></Title>
-                    <p style={{fontSize: "24px", width:"550px", textAlign:"left", marginTop: "15px", lineHeight:"1.1", marginBottom:"40px", color:"#B98F20"}}>share your experience with your favourite streaming platform</p>
+                    <Title>This is <span style={{fontStyle:"italic"}}>THE DISTRICT</span></Title>
+                    <p style={{fontSize: "28px", width:"550px", textAlign:"left", marginTop: "15px", lineHeight:"1.1", marginBottom:"40px", color:"#dcdeed"}}>A website to share your experience with your favourite streaming platform</p>
                     {isAuthenticated ? <StyledLink to="/community">Visit the Community<BiArrowToRight style={{backgroundColor:"transparent"}}/></StyledLink>
                     :
                     <Login onClick={() => loginWithRedirect({
@@ -81,8 +81,10 @@ width: 52%;
 display: flex;
 align-items: center;
 justify-content: space-around;
+margin-top:10px;
 `
 const StyledLink = styled(Link)`
+margin-top:10px;
 color:#B98F20;
 font-size:24px;
 text-decoration:none;
@@ -100,12 +102,13 @@ width: 52%;
 const Title = styled.div`
 font-size: 48px;
 text-align: left;
+font-weight: bold;
 `
 const Content = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
-margin-right: -80px;
+margin-right: -40px;
 `
 const SlideContainer = styled.div`
 margin: 0;
