@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Context } from "./Context"
 import styled from "styled-components"
 import { SiPrime, SiNetflix, SiAppletv, SiHulu, SiSlideshare} from "react-icons/si";
+import { BsFillShareFill } from "react-icons/bs";
 import disneyLogo from "../img/disney-plus-5636.png"
 
 export const Single = () => {
@@ -31,12 +32,12 @@ export const Single = () => {
                 <Container>
                     <Img src = {movies[filter].posterURLs.original}/>
                     <Right>
-                        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
                         <Title>
                             <Name>{movies[filter].originalTitle}</Name>
                             <p>{movies[filter].year}</p>
                         </Title>
-                        <SiSlideshare style={{backgroundColor:"transparent", color:"#B98F20"}} onClick={()=>{setTopic(movies[filter].originalTitle)
+                        <BsFillShareFill style={{backgroundColor:"transparent", color:"#B98F20", fontSize:"28px"}} onClick={()=>{setTopic(movies[filter].originalTitle)
                             navigate("/community")}} />
                         </div>
                         

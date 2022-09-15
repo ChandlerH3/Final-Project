@@ -73,7 +73,7 @@ export const Community = () => {
             <Home>
             {Object.keys(params).length > 0 && 
             <>
-                <textarea value= {topic && `@${topic}`} rows='5' cols='50' type='text' placeholder="What's steaming?" style={{}} onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}} />
+                <textarea rows='5' cols='50' type='text' placeholder="What's streaming?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}>{topic && `@${topic}$`}</textarea>
                 <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </>
 }
@@ -98,13 +98,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding-top: 30px;
-background-color: #B98F20;
+background-color: #b98f20d1;
 `
 
 const Button = styled.button`
 margin-top: 20px;
 margin-bottom: 20px;
-background-color: #B98F20;
+background-color: #b98f20d1;
 border-radius: 50px;
 padding:10px 20px;
 font-size: 16px;

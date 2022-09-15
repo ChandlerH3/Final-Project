@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "./Context";
@@ -7,12 +7,13 @@ import disneyLogo from "../img/disney-plus-5636.png"
 import { BsDot } from "react-icons/bs";
 import ActionBar from "./ActionBar";
 import Loading from "./Loading";
+import { Comment } from "./Comment";
 
 export const PostList = ({handle, params}) => {
     const {postList} = useContext(Context)
+    const [expand, set] = useState(false)
     return (
         <Wrapper>
-                        <Content>
                             {postList ? postList.map((post, index) => {
                                 return (
                             <Post key={index} >
@@ -30,7 +31,8 @@ export const PostList = ({handle, params}) => {
                                         <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
                                     </Bio>
                                     <Feed>{post.post.charAt(0).toUpperCase() + post.post.slice(1)}</Feed>
-                                    <ActionBar id={post.id} number={post.likes} handle={handle} params={params}/>
+                                    <ActionBar id={post.id} number={post.likes} handle={handle} params={params} expand={expand} set={set}/>
+                                    {expand === true && <Comment />}
                                 </Details>
                             </Post >
                                 )
@@ -38,7 +40,6 @@ export const PostList = ({handle, params}) => {
                             : <div style={{display: "flex",
                             justifyContent: "center"}}><Loading /></div>
                         }
-                        </Content>
         </Wrapper>
     );
 }
@@ -52,27 +53,21 @@ text-align: center;
 &:visited{
         color:black;
     }
-    border-right: 1px solid #B98F20;
+    border-right: 1px solid #b98f20d1;
 `
 const Details = styled.div`
 `
 const Post = styled.div`
 border-radius: 1px;
-border: 1px solid #B98F20;
-margin-bottom: 20px;
 display: flex;
 align-items: center;
 padding: 8px 10px;
+border-bottom: 20px solid #b98f20d1;
 `
 const Bio = styled.div`
 display: flex;
 align-items: center;
 margin-bottom: 10px;
-`
-const Content = styled.div`
-margin-left:10px;
-width:100%;
-background-color: #B98F20;
 `
 const Feed = styled.p`
 margin-bottom: 10px;
@@ -98,6 +93,5 @@ margin-right:10px;`
 
 const Wrapper = styled.div`
 width: 500px;
-background-color: #B98F20;
-padding-left: 20px;
+margin-left: 20px;
 `

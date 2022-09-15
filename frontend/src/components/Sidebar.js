@@ -54,7 +54,7 @@ export const Sidebar = () => {
                                 <>{index+1}</>
                                 <FiChevronUp style ={{color:"white", backgroundColor:"transparent"}}/>
                             </Number>
-                            <Community>
+                            <CommunityLink to={`/community/${item[0]}`}>
                                 <>{item[0]==="netflix" && <SiNetflix style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
                                 {item[0]==="apple" && <SiAppletv style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
                                 {item[0]==="hulu" && <SiHulu style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
@@ -62,7 +62,7 @@ export const Sidebar = () => {
                                 {item[0]==="disney" && <img src={disneyLogo} style={{width:"50px", height:"40px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }}/>}
                                 </>
                                 <div style={{marginLeft:"10px"}}>  {item[0].charAt(0).toUpperCase() + item[0].slice(1)}</div>
-                            </Community>
+                            </CommunityLink>
                             <StyledLink to={`/community/${item[0]}`}>join</StyledLink>
                         </Rank>
                     )
@@ -102,11 +102,15 @@ color: black;
         color: black;
     }
 `
-const Community = styled.div`
+const CommunityLink = styled(Link)`
 display: flex;
 align-items: center;
 margin-left: -20px;
 width: 100px;
+text-decoration: none;
+&:visited{
+        color: #dcdeed;
+    }
 `
 const Number = styled.div`
 align-items: center;
@@ -119,20 +123,20 @@ width:30%;
 padding-left: 20px;
 padding-top: 30px;
 padding-right: 30px;
-background-color: #B98F20;
+background-color: #b98f20d1;
 `
 const Top = styled.div`
 display:flex;
 flex-direction: column;
 margin-bottom: 20px;
-border: 1px solid #B98F20;
+border: 1px solid #b98f20d1;
 padding: 10px;
 border-radius: 1px;
 `
 const Popular = styled.div`
 display:flex;
 flex-direction: column;
-border: 1px solid #B98F20;
+border: 1px solid #b98f20d1;
 padding: 10px;
 border-radius: 1px;
 `

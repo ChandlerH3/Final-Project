@@ -12,7 +12,7 @@ const LikeButton = ({ size = 40, like }) => {
   return (
     <Wrapper>
       <Heart isToggled={like} />
-      {like && <PoppingCircle size={size} color="#E790F7" />}
+      {/* {like && <PoppingCircle size={size} color="#E790F7" />} */}
       {like ? (
         <ScaleIn>
           <Heart isToggled={like} />

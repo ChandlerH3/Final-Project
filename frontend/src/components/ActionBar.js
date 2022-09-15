@@ -4,11 +4,12 @@ import { FiShare, FiMessageCircle } from "react-icons/fi";
 import { Context } from "./Context";
 import LikeButton from "./LikeButton/LikeButton"
 
-const ActionBar = ({number, params, id}) => {
+const ActionBar = ({number, params, id, set, expand}) => {
     const [like, setLike] = useState(false);
     const [numOfLikes, setNumOfLikes] = useState(0)
     const {l, setPostList} = useContext(Context)
     const handleToggleLike = () =>{
+    if (Object.keys(params).length > 0 ){
     setLike(true);
     // setNumOfLikes(l+1)
     fetch('/patchLikes', {
@@ -33,28 +34,28 @@ const ActionBar = ({number, params, id}) => {
         .catch((err) => {
             console.error(err);
         });
+    }
 }
     return (
         <Wrapper>
             <Container>
-                {/* <FiMessageCircle onClick={()=> set(!expand)} /> */}
                 <div onClick={handleToggleLike}><LikeButton like={like}/></div>
             </Container>
             <p>{number}</p>
-            {/* {expand && <p>expand</p>} */}
+            <FiMessageCircle style={{backgroundColor:"transparent", width:"18px", height:"18px", marginLeft:"10px"}} onClick={()=> set(!expand)} />
         </Wrapper>
     );
 };
 const Wrapper = styled.div`
 display: flex;
 align-items: center;
-justify-content: space-around;
 height: 48px;
 `;
 
 const Container = styled.div`
 display: flex;
 align-items: center;
+margin-right: 20px;
 `
 const LikeDiv = styled.div`
 display:flex;
