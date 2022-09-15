@@ -74,7 +74,8 @@ const addPosts = async (req, res) => {
         user: req.body.user,
         community: req.body.community,
         post: req.body.post,
-        date: req.body.date
+        date: req.body.date,
+        comments: req.body.comments
     }
     try {
         const client = new MongoClient(MONGO_URI, options);
@@ -143,6 +144,48 @@ const patchLikes = async (req, res) => {
         }
 };
 
+const patchComments = async (req, res) => {
+    const comments = req.body.comments
+    const id = req.body.id
+    const query = { id: id };
+    console.log(id)
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+            const newValues = { $set: { "comments": comments }};
+            await client.connect();
+
+            const db = client.db('The_District');
+            await db.collection("posts").updateOne(query, newValues);
+            const find = await db.collection("posts").findOne(query);
+
+            find ? res.status(200).json({ status: 200, data: find})
+            : res.status(404).json({ status: 404, data: "Not Found" });
+            client.close();
+        } catch (err) {
+            res.status(500).json({ status: 500, message: err.message });
+        }
+};
+
+const deletePosts = async (req, res) => {
+    const id = req.body.id
+    const query = { id: id };
+    console.log(id)
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+            await client.connect();
+
+            const db = client.db('The_District');
+            await db.collection("posts").deleteOne(query);
+            const find = await db.collection("posts").find().toArray();
+
+            find ? res.status(200).json({ status: 200, data: find})
+            : res.status(404).json({ status: 404, data: "Not Found" });
+            client.close();
+        } catch (err) {
+            res.status(500).json({ status: 500, message: err.message });
+        }
+};
+
 
 module.exports = {
     getPosts,
@@ -151,5 +194,7 @@ module.exports = {
     patchLikes,
     addVotes,
     getVotes,
-    patchVotes
+    patchVotes,
+    patchComments,
+    deletePosts
 };

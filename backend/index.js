@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { addPosts, getPosts, addVotes, getVotes, patchVotes, getEachCommunityPosts, patchLikes} = require("./handlers")
+const { addPosts, getPosts, addVotes, getVotes, patchVotes, getEachCommunityPosts, patchLikes, patchComments, deletePosts} = require("./handlers")
 
 express()
     .use(morgan("tiny"))
@@ -15,6 +15,8 @@ express()
     .get('/getposts', getPosts)
     .get('/getposts/:community', getEachCommunityPosts)
     .patch('/patchLikes', patchLikes)
+    .patch('/patchComments', patchComments)
+    .delete('/deletePosts', deletePosts)
     
     .post('/addvotes', addVotes)
     .get('/getvotes', getVotes)

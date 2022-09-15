@@ -4,14 +4,40 @@ import styled from "styled-components";
 import { Context } from "./Context";
 import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import disneyLogo from "../img/disney-plus-5636.png"
-import { BsDot } from "react-icons/bs";
+import { BsDot, BsFillTrashFill } from "react-icons/bs";
 import ActionBar from "./ActionBar";
 import Loading from "./Loading";
-import { Comment } from "./Comment";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export const PostList = ({handle, params}) => {
-    const {postList} = useContext(Context)
-    const [expand, set] = useState(false)
+
+export const PostList = ({handle, params, date}) => {
+    const {postList, c, setPostList} = useContext(Context)
+    const { user } = useAuth0()
+    const handleDelete = (props) => {
+        if (Object.keys(params).length > 0){
+        fetch('/deletePosts', {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: props.id
+            }),
+            })
+            .then((res) => res.json())
+                .then((data) => {
+                    fetch(`/getposts/${params.community}`)
+                    .then((res)=>res.json())
+                    .then((data)=>{
+                        setPostList(data.data)
+                    })
+                })
+            .catch((err) => {
+                console.error(err);
+            });
+        }
+    }
     return (
         <Wrapper>
                             {postList ? postList.map((post, index) => {
@@ -19,20 +45,28 @@ export const PostList = ({handle, params}) => {
                             <Post key={index} >
                                 <StyledLink to={`/community/${post.community}`}>
                                 {post.community==="netflix" && <SiNetflix style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent", color: "#E50914"}} />}
-                                        {post.community==="apple" && <SiAppletv style={{width:"50px", height:"50px",backgroundColor:"white", color:"#555555",borderRadius: "50%",padding:"7px"}} />}
+                                        {post.community==="apple" && <SiAppletv style={{width:"40px", height:"40px",backgroundColor:"white", color:"#555555",borderRadius: "50%",padding:"7px", marginRight:"10px"}} />}
                                         {post.community==="hulu" && <SiHulu style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent", color:"#1ce783"}} />}
                                         {post.community==="prime" && <SiPrime style={{width:"32px", height:"32px", marginRight:"10px",color:"black",backgroundColor:"transparent", color:"#00A8E1"}} />}
-                                        {post.community==="disney" && <img src={disneyLogo} style={{width:"50px", height:"50px",backgroundColor:"white", borderRadius: "50%",padding:"7px"}}/>}
+                                        {post.community==="disney" && <img src={disneyLogo} style={{width:"45px", height:"45px",backgroundColor:"white", borderRadius: "50%",padding:"7px"}}/>}
                                 </StyledLink>
-                                <Details key={post.id}>
+                                <Details>
                                     <Bio style={{display:"flex"}}>
-                                        <Avatar src={post.picture} />
-                                        <Name>{post.user}</Name>
-                                        <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
+                                        <div style={{display:"flex", alignItems:"center"}}>
+                                            <Avatar src={post.picture} />
+                                            <Name>{post.user}</Name>
+                                            <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
+                                        </div>
+                                        <>
+                                        {post.user === user.nickname && 
+                                        <Div onClick={()=>handleDelete(post)}>
+                                            <BsFillTrashFill style={{backgroundColor:"transparent"}}/>
+                                        </Div>
+                                        }
+                                        </>
                                     </Bio>
                                     <Feed>{post.post.charAt(0).toUpperCase() + post.post.slice(1)}</Feed>
-                                    <ActionBar id={post.id} number={post.likes} handle={handle} params={params} expand={expand} set={set}/>
-                                    {expand === true && <Comment />}
+                                    <ActionBar id={post.id} number={post.likes} handle={handle} params={params} post={post} date={date} commentN={post.comments.length}/>
                                 </Details>
                             </Post >
                                 )
@@ -43,7 +77,13 @@ export const PostList = ({handle, params}) => {
         </Wrapper>
     );
 }
-
+const Div = styled.div`
+opacity: 0.8;
+cursor: pointer;
+&:hover{
+        opacity: 1;
+    }
+`
 const StyledLink = styled(Link)`
 margin-right: 20px;
 display: block;
@@ -68,6 +108,8 @@ const Bio = styled.div`
 display: flex;
 align-items: center;
 margin-bottom: 10px;
+justify-content: space-between;
+width: 400px;
 `
 const Feed = styled.p`
 margin-bottom: 10px;

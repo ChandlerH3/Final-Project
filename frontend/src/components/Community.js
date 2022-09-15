@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
 export const Community = () => {
     const params = useParams()
     const community = params.community
-    const {post, setPost, setPostList, topic, l} = useContext(Context)
+    const {post, setPost, setPostList, topic, l, c} = useContext(Context)
     const { isAuthenticated, user } = useAuth0()
     //timestamp
     let dateObj = new Date()
@@ -52,7 +52,8 @@ export const Community = () => {
                 user: user.nickname,
                 community: community,
                 post: post,
-                date: date
+                date: date,
+                comments: c
             }),
             })
             .then((res) => res.json())
@@ -77,7 +78,7 @@ export const Community = () => {
                 <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </>
 }
-                <PostList params={params} />
+                <PostList params={params} date={date}/>
             </Home>
             <Sidebar />
         </Wrapper>
