@@ -58,7 +58,7 @@ export const PostList = ({handle, params, date}) => {
                                             <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
                                         </div>
                                         <>
-                                        {post.user === user.nickname && 
+                                        {post.user === user?.nickname && 
                                         <Div onClick={()=>handleDelete(post)}>
                                             <BsFillTrashFill style={{backgroundColor:"transparent"}}/>
                                         </Div>
@@ -135,5 +135,7 @@ margin-right:10px;`
 
 const Wrapper = styled.div`
 width: 500px;
-margin-left: 20px;
+padding-left: 20px;
+padding-top:30px;
+background-color: #b98f20d1;
 `

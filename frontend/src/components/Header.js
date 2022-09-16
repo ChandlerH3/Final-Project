@@ -1,9 +1,11 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import AuthNav from './auth-nav';
 
 
 export const Header = () => {
+    const {user, isAuthenticated} = useAuth0()
     const navigate = useNavigate()
     const handleClick = () => {
         navigate('/')
@@ -14,6 +16,7 @@ export const Header = () => {
                 <Container>
                     <p onClick={handleClick}>The District</p>
                 </Container>
+                {isAuthenticated && <p style={{opacity:0.8}}>Welcome {user?.nickname}</p>}
                 <Menu>
                     <Div>
                         <StyledLink to="/community">Community</StyledLink>

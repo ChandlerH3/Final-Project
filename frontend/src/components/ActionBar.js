@@ -4,12 +4,14 @@ import { FiShare, FiMessageCircle } from "react-icons/fi";
 import { Context } from "./Context";
 import LikeButton from "./LikeButton/LikeButton"
 import { Comment } from "./Comment";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ActionBar = ({number, params, id, post, date, commentN}) => {
     const [like, setLike] = useState(false);
     const [numOfLikes, setNumOfLikes] = useState(0)
     const {l, setPostList} = useContext(Context)
     const [expand, set] = useState(false)
+    const {isAuthenticated} = useAuth0()
     const handleToggleLike = () =>{
     if (Object.keys(params).length > 0 ){
     setLike(true);
@@ -48,7 +50,7 @@ const ActionBar = ({number, params, id, post, date, commentN}) => {
             <FiMessageCircle style={{backgroundColor:"transparent", width:"18px", height:"18px", marginLeft:"10px", marginRight:"10px"}} onClick={()=> set(!expand)} />
             <p>{commentN}</p>
         </Wrapper>
-        {expand && <Comment post={post} params={params} date={date}/>}
+        {expand && isAuthenticated && <Comment post={post} params={params} date={date}/>}
         </>
     );
 };

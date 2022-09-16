@@ -67,15 +67,15 @@ export const Comment = ({post, params, date}) => {
 }
 const Button = styled.button`
 border:none;
-position: absolute;
 border-radius: 18px;
 padding: 5px 10px;
 background-color: #B98F20;
 color:#dcdeed;
+margin-left: 10px;
 `
 const Input = styled.textarea`
 border-radius: 18px;
-padding: 5px 10px;
+padding: 10px 10px;
 &:focus{
 outline: none;
 border-radius: 18px;

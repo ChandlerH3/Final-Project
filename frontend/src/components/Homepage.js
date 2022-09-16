@@ -82,8 +82,10 @@ display: flex;
 align-items: center;
 justify-content: space-around;
 margin-top:10px;
+cursor:pointer;
 `
 const StyledLink = styled(Link)`
+cursor:pointer;
 margin-top:10px;
 color:#B98F20;
 font-size:24px;

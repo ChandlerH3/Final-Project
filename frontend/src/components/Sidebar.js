@@ -98,6 +98,10 @@ margin-bottom: 10px;
 text-decoration: none;
 background-color:#dcdeed;
 color: black;
+opacity: 0.8;
+    &:hover{
+        opacity: 1;
+    }
 &:visited{
         color: black;
     }
@@ -158,12 +162,13 @@ const StyledLink = styled(Link)`
 border: 1px solid black;
 border-radius: 18px;
 padding: 10px 15px;
-cursor: pointer;
 opacity: 0.8;
 background-color: white;
 color:black;
 text-decoration: none;
 transition: all 150ms ease-in-out;
+opacity: 0.8;
+cursor:pointer;
     &:hover{
         opacity: 1;
     }

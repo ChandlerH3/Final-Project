@@ -37,7 +37,7 @@ export const Single = () => {
                             <Name>{movies[filter].originalTitle}</Name>
                             <p>{movies[filter].year}</p>
                         </Title>
-                        <BsFillShareFill style={{backgroundColor:"transparent", color:"#B98F20", fontSize:"28px"}} onClick={()=>{setTopic(movies[filter].originalTitle)
+                        <BsFillShareFill style={{backgroundColor:"transparent", color:"#B98F20", fontSize:"28px", cursor:"pointer"}} onClick={()=>{setTopic(movies[filter].originalTitle)
                             navigate("/community")}} />
                         </div>
                         
