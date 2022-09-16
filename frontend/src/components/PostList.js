@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "./Context";
@@ -11,8 +11,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 export const PostList = ({handle, params, date}) => {
-    const {postList, c, setPostList} = useContext(Context)
+    const {postList, setPostList} = useContext(Context)
     const { user } = useAuth0()
+
+    //delete posts function
     const handleDelete = (props) => {
         if (Object.keys(params).length > 0){
         fetch('/deletePosts', {
@@ -93,7 +95,7 @@ text-align: center;
 &:visited{
         color:black;
     }
-    border-right: 1px solid #b98f20d1;
+    border-right: 1px solid #B98F20;
 `
 const Details = styled.div`
 `
@@ -102,7 +104,7 @@ border-radius: 1px;
 display: flex;
 align-items: center;
 padding: 8px 10px;
-border-bottom: 20px solid #b98f20d1;
+border-bottom: 20px solid #B98F20;
 `
 const Bio = styled.div`
 display: flex;
@@ -137,5 +139,5 @@ const Wrapper = styled.div`
 width: 500px;
 padding-left: 20px;
 padding-top:30px;
-background-color: #b98f20d1;
+background-color: #B98F20;
 `

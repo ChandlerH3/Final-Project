@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState} from "react"
+import { useContext, useEffect} from "react"
 import { Context } from "./Context"
 import styled from "styled-components"
 import { PostList } from "./PostList"
@@ -12,6 +12,7 @@ export const Community = () => {
     const community = params.community
     const {post, setPost, setPostList, topic, l, c} = useContext(Context)
     const { isAuthenticated, user } = useAuth0()
+
     //timestamp
     let dateObj = new Date()
     let month = dateObj.getUTCMonth() + 1
@@ -29,7 +30,6 @@ export const Community = () => {
             })
         }
         if (Object.keys(params).length > 0){
-            console.log("fetch each")
             fetch(`/getposts/${params.community}`)
             .then((res)=>res.json())
             .then((data)=>{
@@ -39,6 +39,7 @@ export const Community = () => {
         
     }, [params])
 
+    //submit post
     const handleSubmit = (e) => {
             fetch('/addPosts', {
             method: 'POST',
@@ -74,7 +75,7 @@ export const Community = () => {
             <Home>
             {Object.keys(params).length > 0 && 
             <>
-                <textarea rows='5' cols='50' type='text' placeholder="What's streaming?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}>{topic && `@${topic}$`}</textarea>
+                <textarea rows='5' cols='50' type='text' placeholder="What's streaming?" onChange={(e)=> {e.preventDefault(); setPost(e.target.value)}}>{topic && `@${topic}`}</textarea>
                 <Button type="submit" onClick={handleSubmit} disabled={post.length <= 5 ? true : false}>Post</Button>
             </>
 }
@@ -99,7 +100,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding-top: 30px;
-background-color: #b98f20d1;
+background-color: #B98F20;
 `
 
 const Button = styled.button`

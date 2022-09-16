@@ -73,15 +73,10 @@ const Movie = styled.div`
 display: flex;
 flex-direction: column;
 text-decoration: none;
-/* margin-top: 20px;
-margin-bottom:20px; */
 color:black;
 box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
 transition: all 150ms ease-in-out;
     &:visited{
         color:black;
     }
-    /* &:hover{
-            transform:scale(1.05)
-        } */
 `

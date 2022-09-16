@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Context } from "./Context"
 import styled from "styled-components"
-import { SiPrime, SiNetflix, SiAppletv, SiHulu, SiSlideshare} from "react-icons/si";
+import { SiPrime, SiNetflix, SiAppletv, SiHulu} from "react-icons/si";
 import { BsFillShareFill } from "react-icons/bs";
 import disneyLogo from "../img/disney-plus-5636.png"
 
@@ -10,6 +10,8 @@ export const Single = () => {
     const navigate = useNavigate()
     const name = useParams()
     const {merg, genres, netflixD, setTopic} = useContext(Context)
+
+    //only get the movies from merg array
     const movies = []
     if (netflixD) {
     merg.map((item)=> {
@@ -22,6 +24,7 @@ export const Single = () => {
     }
         )
     }
+    //find the movie by comparing imdbID and params
     const filter = movies?.findIndex((movie)=> 
         movie.imdbID === name.single
     )

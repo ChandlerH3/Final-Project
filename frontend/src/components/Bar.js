@@ -1,7 +1,6 @@
 import { useSpring, animated, config } from 'react-spring'
 
 export const Bar =({width, text})=> {
-    console.log(typeof Number(width))
     const styles = useSpring({
         text: text,
         val: width>0 ? Number(width) : 0,

@@ -8,9 +8,10 @@ import { Link } from 'react-router-dom';
 import wp from "../img/wp.jpg"
 import Loading from './Loading';
 
-export const Voting =({width})=> {
+export const Voting =()=> {
     const {nVote, setNVote,dVote,setDVote,aVote,setAVote,pVote,setPVote,hVote,setHVote, voted, setVoted, isAuthenticated, voteResult, setVoteResult} = useContext(Context)
     const [test, setTest] = useState(false)
+
     //votes calculation
     const votes = [nVote, dVote, pVote, aVote, hVote]
     const result = votes.reduce((a,b)=> a+b, 0)
@@ -50,9 +51,9 @@ export const Voting =({width})=> {
         }     
         setTest(true);
     }
+    
     //post if no vote data in db after voting
     if (test && voteResult.length == 0 ) {
-        console.log("post data")
         fetch('/addvotes', {
     method: 'POST',
     headers: {
@@ -69,7 +70,6 @@ export const Voting =({width})=> {
         fetch('/getvotes')
         .then((res)=>res.json())
         .then((data)=>{
-            console.log("clicked", data)
             setVoteResult(data.data)
         })
     })
@@ -80,7 +80,6 @@ export const Voting =({width})=> {
 
     //patch if db already has data aftter voting
     if (test && voteResult.length > 0) {
-        console.log("patch data")
         fetch("/addvotes", {
             method: "PATCH",
             headers: { "Content-type": "application/json" },
@@ -94,7 +93,6 @@ export const Voting =({width})=> {
                 fetch('/getvotes')
                 .then((res)=>res.json())
                 .then((data)=>{
-                    console.log("clicked", data)
                     setVoteResult(data.data)
                 })
             })

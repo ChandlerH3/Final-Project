@@ -8,7 +8,9 @@ import disneyLogo from "../img/disney-plus-5636.png"
 import Loading from "./Loading";
 
 export const Sidebar = () => {
-    const {merg, genres, netflixD} = useContext(Context)
+    const {merg, netflixD} = useContext(Context)
+
+    //get only movies from merg 
     const movies = []
     if (netflixD) {
     merg.map((item)=> {
@@ -21,6 +23,8 @@ export const Sidebar = () => {
     }
         )
     }
+
+    //get all posts and will be used to filter out each post's community to rank
     const [fullPost, set] = useState()
     useEffect(()=> {
             fetch('/getposts')
@@ -29,6 +33,7 @@ export const Sidebar = () => {
                 set(data.data)
             }) 
     }, [])
+    //function to rank community based on the number of posts
     const postArray = fullPost?.map(item => item.community)
     const rankArray = {}
     if (postArray){
@@ -127,20 +132,20 @@ width:30%;
 padding-left: 20px;
 padding-top: 30px;
 padding-right: 30px;
-background-color: #b98f20d1;
+background-color: #B98F20;
 `
 const Top = styled.div`
 display:flex;
 flex-direction: column;
 margin-bottom: 20px;
-border: 1px solid #b98f20d1;
+border: 1px solid #B98F20;
 padding: 10px;
 border-radius: 1px;
 `
 const Popular = styled.div`
 display:flex;
 flex-direction: column;
-border: 1px solid #b98f20d1;
+border: 1px solid #B98F20;
 padding: 10px;
 border-radius: 1px;
 `

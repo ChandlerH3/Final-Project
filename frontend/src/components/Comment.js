@@ -1,14 +1,15 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { BsArrowReturnRight } from "react-icons/bs";
 import styled from "styled-components";
 import { Context } from "./Context";
 import { BsDot } from "react-icons/bs";
 
 export const Comment = ({post, params, date}) => {
-    const {c, setC, postList, setPostList} = useContext(Context)
+    const {c, setC, setPostList} = useContext(Context)
     const { user } = useAuth0()
-    console.log(post.comments)
+    
+    //add comments to post data using post.id
     const handleComment = () =>{
         if (Object.keys(params).length > 0 ){
         fetch('/patchComments', {

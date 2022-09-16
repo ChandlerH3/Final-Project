@@ -14,7 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 
 export const Homepage = () => {
     const { loginWithRedirect } = useAuth0();
-const slides = [ apple, disney, netflix, hulu, prime];
+    const slides = [ apple, disney, netflix, hulu, prime];
     const [index, set] = useState(0);
     const {isAuthenticated} = useContext(Context)
     const transitions = useTransition(index, {
@@ -134,64 +134,4 @@ justify-content: right;
 padding: 0;
 margin: 0;
 width: 100%;
-`
-// const BarDiv = styled.div`
-// width: 100%;
-// `
-
-// const ItemName = styled.p`
-// width: 60px;`
-// const VoteItem = styled.div`
-// display:flex;
-// `
-// const VoteContainer = styled.div`
-// display:flex;
-// flex-direction: column;
-// `
-
-// const Name = styled.p`
-// text-align:center;
-// margin-top: 15px;
-// margin-bottom: 10px;
-// `
-// const Price = styled.p`
-// text-align: center;
-// `
-const Img = styled.img`
-width: 100px;
-height:100px;
-align-self: center;`
-
-
-const Feature= styled.div`
-display:grid;
-grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
-gap:1.875rem;
-margin-top: 20px;
-`
-
-// const Wrapper = styled.div`
-// display:flex;
-// flex-direction: column;
-// margin-left: 20px;
-// margin-right: 20px;
-// align-self: center;
-// justify-content: center;
-// `
-
-const Movie = styled.div`
-display: flex;
-flex-direction: column;
-text-decoration: none;
-margin-top: 20px;
-padding: 20px;
-color:black;
-box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
-transition: all 150ms ease-in-out;
-    &:visited{
-        color:black;
-    }
-    &:hover{
-            transform:scale(1.05)
-        }
 `

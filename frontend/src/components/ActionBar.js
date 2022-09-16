@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import { FiShare, FiMessageCircle } from "react-icons/fi";
+import { useContext, useState } from "react";
+import { FiMessageCircle } from "react-icons/fi";
 import { Context } from "./Context";
 import LikeButton from "./LikeButton/LikeButton"
 import { Comment } from "./Comment";
@@ -8,14 +8,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const ActionBar = ({number, params, id, post, date, commentN}) => {
     const [like, setLike] = useState(false);
-    const [numOfLikes, setNumOfLikes] = useState(0)
     const {l, setPostList} = useContext(Context)
     const [expand, set] = useState(false)
     const {isAuthenticated} = useAuth0()
+
+    //add likes number to post data using id
     const handleToggleLike = () =>{
     if (Object.keys(params).length > 0 ){
     setLike(true);
-    // setNumOfLikes(l+1)
     fetch('/patchLikes', {
         method: 'PATCH',
         headers: {

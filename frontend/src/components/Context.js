@@ -3,6 +3,7 @@ import { useState, useEffect, createContext } from "react";
 
 export const Context = createContext(null);
 export const Provider = ({ children }) => {
+    //state to gather data from API
     const [netflixD, setNetflixD] = useState([])
     const [disneyD, setDisneyD] = useState([])
     const [primeD, setPrimeD] = useState([])
@@ -12,6 +13,7 @@ export const Provider = ({ children }) => {
     const [voteResult, setVoteResult] = useState([])
     const { isAuthenticated } = useAuth0()
 
+    //state for posts, vots, comments and likes
     const [post, setPost] = useState("")
     const [voted, setVoted] = useState()
     const [postList, setPostList] = useState()
@@ -19,12 +21,14 @@ export const Provider = ({ children }) => {
     const [topic, setTopic] = useState()
     const [c, setC] = useState([])
 
+    // state set up to record vote for each platform
     const [nVote, setNVote] = useState(0)
     const [dVote, setDVote] = useState(0)
     const [pVote, setPVote] = useState(0)
     const [aVote, setAVote] = useState(0)
     const [hVote, setHVote] = useState(0)
 
+    // function to create data array for each platform
     const nA = []
     const dA = []
     const pA = []
@@ -54,7 +58,7 @@ export const Provider = ({ children }) => {
             })
     }, [isAuthenticated])
 
-
+////merged array
 // const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
 
 //     // genresArray

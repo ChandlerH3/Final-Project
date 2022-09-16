@@ -126,7 +126,6 @@ const patchLikes = async (req, res) => {
     const likes = req.body.likes
     const id = req.body.id
     const query = { id: id };
-    console.log(id)
     try {
         const client = new MongoClient(MONGO_URI, options);
             const newValues = { $set: { "likes": likes }};
@@ -148,7 +147,6 @@ const patchComments = async (req, res) => {
     const comments = req.body.comments
     const id = req.body.id
     const query = { id: id };
-    console.log(id)
     try {
         const client = new MongoClient(MONGO_URI, options);
             const newValues = { $set: { "comments": comments }};
@@ -169,7 +167,6 @@ const patchComments = async (req, res) => {
 const deletePosts = async (req, res) => {
     const id = req.body.id
     const query = { id: id };
-    console.log(id)
     try {
         const client = new MongoClient(MONGO_URI, options);
             await client.connect();
