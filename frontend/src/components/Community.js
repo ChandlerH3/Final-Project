@@ -105,12 +105,12 @@ background-color: #b98f20d1;
 const Button = styled.button`
 margin-top: 20px;
 margin-bottom: 20px;
-background-color: #b98f20d1;
+background-color: #dcdeed;
 border-radius: 50px;
 padding:10px 20px;
 font-size: 16px;
 border: none;
-color: white;
+color: #2e2f39;
 &:disabled{
     opacity: 0.5;
     background-color:#dcdeed;

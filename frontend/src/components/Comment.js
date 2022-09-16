@@ -47,7 +47,7 @@ export const Comment = ({post, params, date}) => {
                         <Avatar src={post.comments[0].pic} />
                         <Name>{post.comments[0].user}</Name>
                         <Handle>
-                            <BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>
+                            <BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"#dcdeed"}}/>
                             {post.comments[0].date}
                         </Handle>
                     </Bio>

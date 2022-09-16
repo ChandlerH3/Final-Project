@@ -52,7 +52,7 @@ export const Sidebar = () => {
                         <Rank key={index}>
                             <Number>
                                 <>{index+1}</>
-                                <FiChevronUp style ={{color:"white", backgroundColor:"transparent"}}/>
+                                <FiChevronUp style ={{color:"#dcdeed", backgroundColor:"transparent"}}/>
                             </Number>
                             <CommunityLink to={`/community/${item[0]}`}>
                                 <>{item[0]==="netflix" && <SiNetflix style={{width:"50px", height:"45px",color:"black", backgroundColor:"white", borderRadius: "50%",padding:"7px" }} />}
@@ -163,7 +163,7 @@ border: 1px solid black;
 border-radius: 18px;
 padding: 10px 15px;
 opacity: 0.8;
-background-color: white;
+background-color: #dcdeed;
 color:black;
 text-decoration: none;
 transition: all 150ms ease-in-out;

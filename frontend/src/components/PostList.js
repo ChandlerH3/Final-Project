@@ -55,7 +55,7 @@ export const PostList = ({handle, params, date}) => {
                                         <div style={{display:"flex", alignItems:"center"}}>
                                             <Avatar src={post.picture} />
                                             <Name>{post.user}</Name>
-                                            <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"white"}}/>{post.date}</Handle>
+                                            <Handle><BsDot style={{alignSelf: 'center',backgroundColor:"transparent", color:"#dcdeed"}}/>{post.date}</Handle>
                                         </div>
                                         <>
                                         {post.user === user?.nickname && 
