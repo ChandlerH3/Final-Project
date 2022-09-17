@@ -61,7 +61,7 @@ export const Provider = ({ children }) => {
     // //merged array
     // const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
 
-    // // genresArray
+    // // genres Array
     // useEffect(()=> {
     //     const options = {
     //         method: 'GET',
