@@ -1,6 +1,6 @@
 # Final-Project
 
-This is my final project of my Diploma of Full-Stack Web Development at Concordia University, which builds a website where people can share their experience with various streaming platforms. This project is developed using React, Node.js, MongoDB. APIs such as Auth0 and Streaming Availability(RapidAPI) were also implemented.
+This is my final project of my Diploma of Full-Stack Web Development at Concordia University, which builds a website where people can share their experience with various streaming platforms. This project is developed using React, Node.js, MongoDB. APIs such as Auth0 and Streaming Availability(RapidAPI) are also implemented.
 
 ## Frontend
 
