@@ -58,8 +58,8 @@ export const Provider = ({ children }) => {
             })
     }, [isAuthenticated])
 
-//merged array
-const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
+    //merged array
+    const merg = [{'Netflix': nA }, {'Disney': dA}, {"Prime": pA}, {"Apple": aA}, {"Hulu": hA}]
 
     // genresArray
     useEffect(()=> {
